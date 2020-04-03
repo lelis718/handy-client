@@ -1,5 +1,5 @@
-name: handy_client
-description: A project made to help people finding people to help
+name: handyclientapp
+description: Handy Application
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  font_awesome_flutter: ^8.8.1
   flutter:
     sdk: flutter
 
