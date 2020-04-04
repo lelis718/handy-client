@@ -35,7 +35,7 @@ class _IntroPageState extends State<IntroPage> {
     cards.add(new IntroCard("Add local and what you are planning to do", FontAwesomeIcons.searchLocation, Colors.lightBlueAccent));
     cards.add(new IntroCard("Someone will receive your request to give you a hand!", FontAwesomeIcons.smileWink, Colors.lightBlueAccent));
     cards.add(new IntroCard("Want to help someone?", FontAwesomeIcons.peopleCarry, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Swipe between the cards for give a hand to someone. ", FontAwesomeIcons.arrowsAltH, Colors.lightBlueAccent));
+    cards.add( new IntroCard("Swipe between the cards for give a hand to someone. ", FontAwesomeIcons.arrowsAltH, Colors.lightBlueAccent));
     cards.add(new IntroCard("Shall we begin?", FontAwesomeIcons.smileBeam, Colors.lightBlueAccent));
   }
 
