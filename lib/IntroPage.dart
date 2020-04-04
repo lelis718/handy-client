@@ -16,19 +16,8 @@ class _IntroPageState extends State<IntroPage> {
   List<Widget> widgetCards = new List();
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child: Center(
-            child: Stack(
-          alignment: Alignment.center,
-          children: _getIntroCards(),
-        )));
-  }
-
-  @override
-  void didUpdateWidget(IntroPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
     cards = new List();
     cards.add(new IntroCard("Welcome to Handy!", FontAwesomeIcons.smileBeam, Colors.lightBlueAccent));
     cards.add(new IntroCard("Need some help?", FontAwesomeIcons.questionCircle, Colors.lightBlueAccent));
@@ -37,6 +26,17 @@ class _IntroPageState extends State<IntroPage> {
     cards.add(new IntroCard("Want to help someone?", FontAwesomeIcons.peopleCarry, Colors.lightBlueAccent));
     cards.add( new IntroCard("Swipe between the cards for give a hand to someone. ", FontAwesomeIcons.arrowsAltH, Colors.lightBlueAccent));
     cards.add(new IntroCard("Shall we begin?", FontAwesomeIcons.smileBeam, Colors.lightBlueAccent));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.white,
+        child: Center(
+            child: Stack(
+          alignment: Alignment.center,
+          children: _getIntroCards(),
+        )));
   }
 
   List<Widget> _getIntroCards() {
