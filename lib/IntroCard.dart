@@ -30,11 +30,11 @@ class IntroCard {
                     padding: const EdgeInsets.symmetric(vertical: 40),
                     child: FaIcon(this.icon, color: Colors.white, size: 100.0)),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
                   child: Text(title,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white)),
                 )
