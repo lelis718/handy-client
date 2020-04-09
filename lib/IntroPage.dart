@@ -52,6 +52,10 @@ class _IntroPageState extends State<IntroPage> {
             onDragEnd: (drag) {
               setState(() {
                 cards.removeAt(cards.length - (index + 1));
+                if(cards.length == 0){
+                  Navigator.pushReplacementNamed(context, '/app');
+                }
+
               });
             },
             childWhenDragging: Container(),

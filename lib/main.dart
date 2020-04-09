@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_udid/flutter_udid.dart';
+import 'package:handyclientapp/GiveHandList.dart';
+import 'package:handyclientapp/HelpSelector.dart';
 import 'package:handyclientapp/IntroPage.dart';
+import 'package:handyclientapp/NeedHelp.dart';
+import 'package:handyclientapp/SplashPage.dart';
 
 void main() => runApp(HandyClient());
 
 class HandyClient extends StatelessWidget {
   // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Handy',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: IntroPage(title: 'Handy'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashPage(),
+        '/intro': (context) => IntroPage(title:"Handy"),
+        '/app': (context) => HelpSelector(title:"What do you want to do?"),
+        '/giveHandList': (context) => GiveHandList(),
+        '/needHelp': (context) => NeedHelp()
+      },
     );
   }
+  
+  
 }
