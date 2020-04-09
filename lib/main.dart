@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_udid/flutter_udid.dart';
-import 'package:handyclientapp/GiveHandList.dart';
-import 'package:handyclientapp/HelpSelector.dart';
-import 'package:handyclientapp/IntroPage.dart';
-import 'package:handyclientapp/NeedHelp.dart';
-import 'package:handyclientapp/SplashPage.dart';
+import 'package:handyclientapp/give-hand-list.dart';
+import 'package:handyclientapp/help-selector.dart';
+import 'package:handyclientapp/intro-page.dart';
+import 'package:handyclientapp/need-help.dart';
+import 'package:handyclientapp/splash-page.dart';
 
 void main() => runApp(HandyClient());
 

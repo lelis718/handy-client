@@ -6,11 +6,10 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:handyclientapp/IntroCard.dart';
-import 'package:handyclientapp/IntroPage.dart';
+import 'package:handyclientapp/intro-card.dart';
+import 'package:handyclientapp/intro-page.dart';
 
 import '../lib/main.dart';
-
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -19,6 +18,5 @@ void main() {
 
     expect(find.byType(IntroPage), findsOneWidget);
     expect(find.byType(IntroCard), findsNWidgets(5));
-
   });
 }
