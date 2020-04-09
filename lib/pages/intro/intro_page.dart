@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'pages.dart';
+import 'widgets/intro_card.dart';
 
 class IntroPage extends StatefulWidget {
   IntroPage({Key key, this.title}) : super(key: key);
@@ -114,6 +114,3 @@ class _IntroPageState extends State<IntroPage> {
     return widgetCards;
   }
 }
-//0,1,2,3,4
-//1,2,3,4,5
-//(length-index)-(length-index-1)
