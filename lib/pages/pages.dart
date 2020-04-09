@@ -1,6 +1,6 @@
-export 'give-hand-list.dart';
-export 'help-selector.dart';
-export 'intro-card.dart';
-export 'intro-page.dart';
-export 'splash-page.dart';
-export 'need-help.dart';
+export 'give_hand_list.dart';
+export 'help_selector.dart';
+export 'intro_card.dart';
+export 'intro_page.dart';
+export 'splash_page.dart';
+export 'need_help.dart';
