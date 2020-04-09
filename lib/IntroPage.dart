@@ -19,13 +19,55 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     cards = new List();
-    cards.add(new IntroCard("Welcome to Handy!", FontAwesomeIcons.smileBeam, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Need some help?", FontAwesomeIcons.questionCircle, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Add local and what you are planning to do", FontAwesomeIcons.searchLocation, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Someone will receive your request to give you a hand!", FontAwesomeIcons.smileWink, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Want to help someone?", FontAwesomeIcons.peopleCarry, Colors.lightBlueAccent));
-    cards.add( new IntroCard("Swipe between the cards for give a hand to someone. ", FontAwesomeIcons.arrowsAltH, Colors.lightBlueAccent));
-    cards.add(new IntroCard("Shall we begin?", FontAwesomeIcons.smileBeam, Colors.lightBlueAccent));
+    cards.add(
+      new IntroCard(
+        "Welcome to Handy!",
+        FontAwesomeIcons.smileBeam,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Need some help?",
+        FontAwesomeIcons.questionCircle,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Add local and what you are planning to do",
+        FontAwesomeIcons.searchLocation,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Someone will receive your request to give you a hand!",
+        FontAwesomeIcons.smileWink,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Want to help someone?",
+        FontAwesomeIcons.peopleCarry,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Swipe between the cards for give a hand to someone. ",
+        FontAwesomeIcons.arrowsAltH,
+        Colors.lightBlueAccent,
+      ),
+    );
+    cards.add(
+      new IntroCard(
+        "Shall we begin?",
+        FontAwesomeIcons.smileBeam,
+        Colors.lightBlueAccent,
+      ),
+    );
   }
 
   @override
@@ -43,7 +85,7 @@ class _IntroPageState extends State<IntroPage> {
     double spacingMargin = 10;
     double currentMargin = 200;
     double alphaDecrease = 0.2;
-    
+
     widgetCards = new List();
     cards.reversed.toList().asMap().forEach((index, element) {
       widgetCards.add(Positioned(
@@ -52,20 +94,19 @@ class _IntroPageState extends State<IntroPage> {
             onDragEnd: (drag) {
               setState(() {
                 cards.removeAt(cards.length - (index + 1));
-                if(cards.length == 0){
+                if (cards.length == 0) {
                   Navigator.pushReplacementNamed(context, '/app');
                 }
-
               });
             },
             childWhenDragging: Container(),
             feedback: element.drawCard(true),
             child: Opacity(
-              opacity: (1.0-((cards.length-1-index)*alphaDecrease)).clamp(0.0, 1.0),
+              opacity: (1.0 - ((cards.length - 1 - index) * alphaDecrease))
+                  .clamp(0.0, 1.0),
               child: element.drawCard(false),
             ),
-          )
-          ));
+          )));
       currentMargin += spacingMargin;
     });
 

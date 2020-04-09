@@ -18,7 +18,9 @@ class IntroCard {
       child: Card(
         elevation: 12,
         color: this.color,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Container(
           alignment: Alignment.center,
           width: 350,
@@ -26,17 +28,28 @@ class IntroCard {
           child: Column(
             children: <Widget>[
               Container(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: FaIcon(this.icon, color: Colors.white, size: 100.0)),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 40,
+                ),
+                child: FaIcon(
+                  this.icon,
+                  color: Colors.white,
+                  size: 100.0,
+                ),
+              ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                child: Text(title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 40,
+                  horizontal: 30,
+                ),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
               )
             ],
           ),

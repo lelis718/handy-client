@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_udid/flutter_udid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,7 +6,8 @@ class SplashPage extends StatelessWidget {
   Future<DeviceInfo> getDeviceInfo() async {
     String uniqueId = await FlutterUdid.udid;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool hasLoggedIn = prefs.containsKey("hasLoggedIn") ? prefs.getBool("hasLoggedIn") : false;
+    bool hasLoggedIn =
+        prefs.containsKey("hasLoggedIn") ? prefs.getBool("hasLoggedIn") : false;
     if (!hasLoggedIn) {
       prefs.setBool("hasLoggedIn", true);
     }
@@ -32,7 +32,7 @@ class SplashPage extends StatelessWidget {
               child: Text('Initializing...',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    decoration:TextDecoration.none,
+                    decoration: TextDecoration.none,
                     fontSize: 16,
                     color: Colors.lightBlueAccent,
                     fontStyle: FontStyle.normal,
@@ -45,7 +45,8 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getDeviceInfo().then((deviceInfo) {
-      if (!deviceInfo.hasLoggedIn) { //First time user access app
+      if (!deviceInfo.hasLoggedIn) {
+        //First time user access app
         Navigator.pushReplacementNamed(context, '/intro');
       } else {
         Navigator.pushReplacementNamed(context, '/app');

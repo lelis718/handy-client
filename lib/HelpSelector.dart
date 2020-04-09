@@ -14,34 +14,44 @@ class _HelpSelectorState extends State<HelpSelector> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        //transform: rotate ? Matrix4.rotationZ(-0.05) : null,
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                  padding: const EdgeInsets.symmetric(vertical: 100),
-                  child: Text(
-                    "Handy",
-                    style: TextStyle(
-                        color: Colors.lightBlueAccent,
-                        decoration: TextDecoration.none),
-                  )),
-              Draggable(
-                  onDragEnd: (drag) {
-                    if(drag.offset.dx.abs() > 30){ //is a valid drag
-                      var isDragRight = drag.offset.dx > 0;
-                      var pageToNavigate = isDragRight ? "/giveHandList":"/needHelp";
-                    debugPrint("Redirecting to ${pageToNavigate}");
-                      Navigator.pushReplacementNamed(context, pageToNavigate);
-                    } 
-                  },
-                  childWhenDragging: Container(),
-                  feedback: buildCard(),
-                  child: buildCard())
-            ],
-          ),
-        ));
+      color: Colors.white,
+      //transform: rotate ? Matrix4.rotationZ(-0.05) : null,
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 100),
+              child: Text(
+                "Handy",
+                style: TextStyle(
+                  color: Colors.lightBlueAccent,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ),
+            Draggable(
+              onDragEnd: (drag) {
+                if (drag.offset.dx.abs() > 30) {
+                  var isDragRight = drag.offset.dx > 0;
+                  var pageToNavigate =
+                      isDragRight ? "/giveHandList" : "/needHelp";
+
+                  debugPrint("Redirecting to ${pageToNavigate}");
+
+                  Navigator.pushReplacementNamed(
+                    context,
+                    pageToNavigate,
+                  );
+                }
+              },
+              childWhenDragging: Container(),
+              feedback: buildCard(),
+              child: buildCard(),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Card buildCard() {
@@ -59,24 +69,33 @@ class _HelpSelectorState extends State<HelpSelector> {
             Column(
               children: <Widget>[
                 Container(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: FaIcon(FontAwesomeIcons.arrowCircleLeft,
-                        color: Colors.white, size: 100.0)),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 40,
+                    ),
+                    child: FaIcon(
+                      FontAwesomeIcons.arrowCircleLeft,
+                      color: Colors.white,
+                      size: 100.0,
+                    )),
                 Container(
                   child: Column(
                     children: <Widget>[
-                      Text("Need a hand?",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                      Text("\nSwipe left\n and describe\n what do you need",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                      Text(
+                        "Need a hand?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        "\nSwipe left\n and describe\n what do you need",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ],
                   ),
                 )
@@ -85,24 +104,29 @@ class _HelpSelectorState extends State<HelpSelector> {
             Column(
               children: <Widget>[
                 Container(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: FaIcon(FontAwesomeIcons.arrowCircleRight,
-                        color: Colors.white, size: 100.0)),
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: FaIcon(FontAwesomeIcons.arrowCircleRight,
+                      color: Colors.white, size: 100.0),
+                ),
                 Container(
                   child: Column(
                     children: <Widget>[
-                      Text("Wanna help?",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                      Text("\nSwipe right\n and discover \nwhat you can do",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                      Text(
+                        "Wanna help?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        "\nSwipe right\n and discover \nwhat you can do",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ],
                   ),
                 )
