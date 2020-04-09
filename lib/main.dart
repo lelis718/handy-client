@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/give-hand-list.dart';
-import 'package:handyclientapp/help-selector.dart';
-import 'package:handyclientapp/intro-page.dart';
-import 'package:handyclientapp/need-help.dart';
-import 'package:handyclientapp/splash-page.dart';
+
+import 'pages/pages.dart';
 
 void main() => runApp(HandyClient());
 
