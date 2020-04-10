@@ -1,6 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/services/device_info_service.dart';
+import 'package:handyclientapp/services/help_service.dart';
+
+import '../app_routes.dart';
 
 class NeedHelp extends StatelessWidget {
   @override
@@ -49,7 +54,39 @@ class MyCustomFormState extends State<MyCustomForm> {
                 if (value.isEmpty) {
                   return 'We need to know what do you neeed';
                 }
-                log(value);
+
+                DeviceInfoServiceDefault().getDeviceInfo().then((deviceInfo) {
+                  HelpService()
+                      .askHelp(
+                    Help(
+                      message: value,
+                      user: deviceInfo.uuid,
+                    ),
+                  )
+                      .then((isSuccess) {
+                    if (isSuccess) {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return AlertDialog(
+                            title: new Text("Help posted with successfully"),
+                            content: new Text("Alert Dialog body"),
+                            actions: <Widget>[
+                              new FlatButton(
+                                child: new Text("Close"),
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.helpSelector);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  });
+                });
+
                 return null;
               },
             ),

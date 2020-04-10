@@ -1,13 +1,33 @@
-import 'package:handyclientapp/model/help_info.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:handyclientapp/model/help.dart';
 
 abstract class HelpService {
-  Future<List<HelpInfo>> listHelpInfo();
+  Future<bool> askHelp(Help help);
+  Future<List<Help>> getHelp();
 }
 
 class HelpServiceDefault extends HelpService {
-  
+  final address = "https://us-central1-handy-app-ad6a5.cloudfunctions.net";
   @override
-  Future<List<HelpInfo>> listHelpInfo() async {
-    return new List();
+  Future<bool> askHelp(Help help) async {
+    var response = await http.post("$address/app/help", body: help.toJson());
+    return response.statusCode == 200;
+  }
+
+  @override
+  Future<List<Help>> getHelp() async {
+    var response = await http.get("$address/app/help");
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      List<Help> helps = List<Help>();
+      for (var h in result) {
+        helps.add(Help.fromJson(h));
+      }
+      return helps;
+    } else {
+      throw Exception('Failed to get help');
+    }
   }
 }
