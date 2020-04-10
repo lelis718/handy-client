@@ -77,7 +77,9 @@ class _IntroPageState extends State<IntroPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(this.widget.title),
+          title: Center(
+            child: Text(this.widget.title),
+          ),
         ),
         body: Container(
           color: Colors.white,
@@ -94,7 +96,7 @@ class _IntroPageState extends State<IntroPage> {
 
   List<Widget> _getIntroCards() {
     double spacingMargin = 10;
-    double currentMargin = 200;
+    double currentMargin = 60;
     double alphaDecrease = 0.2;
 
     widgetCards = new List();
