@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:handyclientapp/service_locator.dart';
 
 import 'app_routes.dart';
 import 'pages/pages.dart';
 
-void main() => runApp(HandyClient());
-
+void main() {
+  setupServiceLocator();
+  runApp(HandyClient());
+}
 class HandyClient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

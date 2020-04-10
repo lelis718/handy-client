@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:handyclientapp/app_routes.dart';
-import 'device_info.dart';
+import 'package:handyclientapp/service_locator.dart';
+import 'package:handyclientapp/services/device_info_service.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -9,6 +10,9 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  
+  DeviceInfoService _deviceInfoService = locator<DeviceInfoService>();
+  
   @override
   initState() {
     super.initState();
@@ -16,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   route() {
-    DeviceInfo().getDeviceInfo().then(
+    _deviceInfoService.getDeviceInfo().then(
       (deviceInfo) {
         var nextPage;
         if (!deviceInfo.hasLoggedIn) {

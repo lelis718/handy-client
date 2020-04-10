@@ -1,18 +1,14 @@
 import 'package:flutter_udid/flutter_udid.dart';
+import 'package:handyclientapp/model/device_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DeviceInfo {
-  String uuid;
-  bool hasLoggedIn;
+abstract class DeviceInfoService {
+  Future<DeviceInfo> getDeviceInfo();
+}
 
-  DeviceInfo({
-    String uuid,
-    bool hasLoggedIn,
-  }) {
-    this.uuid = uuid;
-    this.hasLoggedIn = hasLoggedIn;
-  }
-
+class DeviceInfoServiceDefault extends DeviceInfoService {
+  
+  @override
   Future<DeviceInfo> getDeviceInfo() async {
     String uniqueId = await FlutterUdid.udid;
     SharedPreferences prefs = await SharedPreferences.getInstance();
