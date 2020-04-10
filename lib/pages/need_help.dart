@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NeedHelp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '',
       home: Scaffold(
         appBar: AppBar(
           title: Text('What needs to be done?'),
@@ -70,7 +68,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/');
+                    Navigator.of(context).pop();
                   },
                   child: Text('Back'),
                 )

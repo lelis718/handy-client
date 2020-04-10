@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:handyclientapp/app_routes.dart';
 
 import 'widgets/intro_card.dart';
 
@@ -73,13 +74,22 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child: Center(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(this.widget.title),
+        ),
+        body: Container(
+          color: Colors.white,
+          child: Center(
             child: Stack(
-          alignment: Alignment.center,
-          children: _getIntroCards(),
-        )));
+              alignment: Alignment.center,
+              children: _getIntroCards(),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   List<Widget> _getIntroCards() {
@@ -88,28 +98,33 @@ class _IntroPageState extends State<IntroPage> {
     double alphaDecrease = 0.2;
 
     widgetCards = new List();
-    cards.reversed.toList().asMap().forEach((index, element) {
-      widgetCards.add(Positioned(
-          top: currentMargin,
-          child: Draggable(
-            onDragEnd: (drag) {
-              setState(() {
-                cards.removeAt(cards.length - (index + 1));
-                if (cards.length == 0) {
-                  Navigator.pushReplacementNamed(context, '/app');
-                }
-              });
-            },
-            childWhenDragging: Container(),
-            feedback: element.drawCard(true),
-            child: Opacity(
-              opacity: (1.0 - ((cards.length - 1 - index) * alphaDecrease))
-                  .clamp(0.0, 1.0),
-              child: element.drawCard(false),
+    cards.reversed.toList().asMap().forEach(
+      (index, element) {
+        widgetCards.add(
+          Positioned(
+            top: currentMargin,
+            child: Draggable(
+              onDragEnd: (drag) {
+                setState(() {
+                  cards.removeAt(cards.length - (index + 1));
+                  if (cards.length == 0) {
+                    Navigator.pushNamed(context, AppRoutes.helpSelector);
+                  }
+                });
+              },
+              childWhenDragging: Container(),
+              feedback: element.drawCard(true),
+              child: Opacity(
+                opacity: (1.0 - ((cards.length - 1 - index) * alphaDecrease))
+                    .clamp(0.0, 1.0),
+                child: element.drawCard(false),
+              ),
             ),
-          )));
-      currentMargin += spacingMargin;
-    });
+          ),
+        );
+        currentMargin += spacingMargin;
+      },
+    );
 
     return widgetCards;
   }

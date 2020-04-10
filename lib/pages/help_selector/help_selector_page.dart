@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handyclientapp/app_routes.dart';
 import 'widgets/widgets.dart';
 
 class HelpSelectorPage extends StatefulWidget {
@@ -13,41 +14,27 @@ class HelpSelectorPage extends StatefulWidget {
 class _HelpSelectorPageState extends State<HelpSelectorPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 100),
-              child: Text(
-                "Handy",
-                style: TextStyle(
-                  color: Colors.lightBlueAccent,
-                  decoration: TextDecoration.none,
-                ),
-              ),
-            ),
-            Draggable(
-              onDragEnd: (drag) {
-                if (drag.offset.dx.abs() > 30) {
-                  var isDragRight = drag.offset.dx > 0;
-                  var pageToNavigate =
-                      isDragRight ? "/giveHandList" : "/needHelp";
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text(this.widget.title),
+          ),
+        ),
+        body: Center(
+          child: Draggable(
+            onDragEnd: (drag) {
+              if (drag.offset.dx.abs() > 30) {
+                var isDragRight = drag.offset.dx > 0;
 
-                  debugPrint("Redirecting to ${pageToNavigate}");
-
-                  Navigator.pushReplacementNamed(
-                    context,
-                    pageToNavigate,
-                  );
-                }
-              },
-              childWhenDragging: Container(),
-              feedback: buildCard(),
-              child: buildCard(),
-            )
-          ],
+                Navigator.of(context).pushNamed(
+                    isDragRight ? AppRoutes.needHelp : AppRoutes.giveHand);
+              }
+            },
+            childWhenDragging: Container(),
+            feedback: buildCard(),
+            child: buildCard(),
+          ),
         ),
       ),
     );
@@ -57,7 +44,9 @@ class _HelpSelectorPageState extends State<HelpSelectorPage> {
     return Card(
       elevation: 12,
       color: Colors.lightBlueAccent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Container(
         alignment: Alignment.center,
         width: 350,
