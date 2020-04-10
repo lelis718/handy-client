@@ -28,7 +28,7 @@ class _HelpSelectorPageState extends State<HelpSelectorPage> {
                 var isDragRight = drag.offset.dx > 0;
 
                 Navigator.of(context).pushNamed(
-                    isDragRight ? AppRoutes.giveHand : AppRoutes.needHelp);
+                    isDragRight ? AppRoutes.needHelp : AppRoutes.helpList);
               }
             },
             childWhenDragging: Container(),

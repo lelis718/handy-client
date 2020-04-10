@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handyclientapp/pages/chat_page.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'app_routes.dart';
@@ -22,8 +23,9 @@ class HandyClient extends StatelessWidget {
         AppRoutes.intro: (context) => IntroPage(title: "Handy"),
         AppRoutes.helpSelector: (context) =>
             HelpSelectorPage(title: "What do you want to do?"),
-        AppRoutes.giveHand: (context) => GiveHandList(),
-        AppRoutes.needHelp: (context) => NeedHelp()
+        AppRoutes.helpList: (context) => HelpListPage(title: "Swipe cards to give a hand",),
+        AppRoutes.needHelp: (context) => NeedHelp(),
+        AppRoutes.chat: (context) => ChatPage(),
       },
     );
   }
