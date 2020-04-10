@@ -1,19 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/help.dart';
-import 'package:handyclientapp/service_locator.dart';
-import 'package:handyclientapp/services/device_info_service.dart';
-import 'package:handyclientapp/services/help_service.dart';
 
-import '../app_routes.dart';
-
-class NeedHelp extends StatelessWidget {
+class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('What needs to be done?'),
+        title: Text('Chat with who needs help (WIP)'),
       ),
       body: MyCustomForm(),
     );
@@ -29,7 +23,6 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  HelpService helpService = locator<HelpService>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +36,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             TextFormField(
               maxLines: 10,
               decoration: InputDecoration(
-                hintText: 'I need help to do ....',
+                hintText: 'Send a message!',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.pink,
@@ -56,38 +49,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 if (value.isEmpty) {
                   return 'We need to know what do you neeed';
                 }
-
-                DeviceInfoServiceDefault().getDeviceInfo().then((deviceInfo) {
-                  helpService.askHelp(
-                    Help(
-                      message: value,
-                      user: deviceInfo.uuid,
-                    ),
-                  )
-                      .then((isSuccess) {
-                    if (isSuccess) {
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            title: new Text("Help posted with successfully"),
-                            content: new Text("Alert Dialog body"),
-                            actions: <Widget>[
-                              new FlatButton(
-                                child: new Text("Close"),
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.helpSelector);
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
-                  });
-                });
-
+                log(value);
                 return null;
               },
             ),
@@ -107,7 +69,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       }
                     },
                     child: Text(
-                      'Ask Help',
+                      'Message (WIP)',
                       style: TextStyle(
                         color: Colors.white,
                       ),

@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:handyclientapp/app_routes.dart';
+import 'package:handyclientapp/services/help_service.dart';
 import 'widgets/widgets.dart';
 
 class HelpSelectorPage extends StatefulWidget {
@@ -28,7 +31,7 @@ class _HelpSelectorPageState extends State<HelpSelectorPage> {
                 var isDragRight = drag.offset.dx > 0;
 
                 Navigator.of(context).pushNamed(
-                    isDragRight ? AppRoutes.giveHand : AppRoutes.needHelp);
+                    isDragRight ? AppRoutes.needHelp : AppRoutes.helpList);
               }
             },
             childWhenDragging: Container(),
