@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:handyclientapp/model/help.dart';
 
 class HelpCard {
   String description = "";
+  String user = "";
 
-  HelpCard(String description) {
-    this.description = description;
+  HelpCard(Help help) {
+    this.description = help.message;
+    this.user = help.user;
   }
 
   Widget drawCard(bool rotate) {

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/service_locator.dart';
 import 'package:handyclientapp/services/device_info_service.dart';
 import 'package:handyclientapp/services/help_service.dart';
 
@@ -28,6 +29,7 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+  HelpService helpService = locator<HelpService>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +58,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 }
 
                 DeviceInfoServiceDefault().getDeviceInfo().then((deviceInfo) {
-                  HelpService()
-                      .askHelp(
+                  helpService.askHelp(
                     Help(
                       message: value,
                       user: deviceInfo.uuid,
