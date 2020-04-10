@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class NeedHelp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('What needs to be done?'),
-        ),
-        body: MyCustomForm(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('What needs to be done?'),
       ),
+      body: MyCustomForm(),
     );
   }
 }
@@ -58,7 +56,10 @@ class MyCustomFormState extends State<MyCustomForm> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
+                        SnackBar(
+                          content: Text('Processing Data'),
+                        ),
+                      );
                     }
                   },
                   child: Text('Ask Help'),
@@ -68,7 +69,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                   },
                   child: Text('Back'),
                 )

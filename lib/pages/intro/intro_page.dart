@@ -107,12 +107,14 @@ class _IntroPageState extends State<IntroPage> {
             top: currentMargin,
             child: Draggable(
               onDragEnd: (drag) {
-                setState(() {
-                  cards.removeAt(cards.length - (index + 1));
-                  if (cards.length == 0) {
-                    Navigator.pushNamed(context, AppRoutes.helpSelector);
-                  }
-                });
+                setState(
+                  () {
+                    cards.removeAt(cards.length - (index + 1));
+                    if (cards.length == 0) {
+                      Navigator.pushNamed(context, AppRoutes.helpSelector);
+                    }
+                  },
+                );
               },
               childWhenDragging: Container(),
               feedback: element.drawCard(true),
