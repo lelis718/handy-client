@@ -17,7 +17,9 @@ class _IntroPageState extends State<IntroPage> {
   List<IntroCard> cards = new List();
   List<Widget> widgetCards = new List();
 
-  _IntroPageState() {
+  @override
+  void initState() {
+    super.initState();
     for (final cardInfo in widget.cardsInfo) {
       this.cards.add(
             IntroCard(
