@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/pages/help_list/widgets/action_footer.dart';
 import 'package:handyclientapp/pages/help_list/widgets/help_card.dart';
 import 'package:handyclientapp/services/help_service.dart';
 
-import '../../app_routes.dart';
 import '../../service_locator.dart';
 
 class HelpListPage extends StatefulWidget {
-  HelpListPage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  final List<Help> helpRequests;
+  final VoidCallback onHelp;
+  HelpListPage({Key key, @required this.helpRequests, this.onHelp})
+      : super(key: key);
 
   @override
   _HelpListPageState createState() => _HelpListPageState();
@@ -31,7 +31,7 @@ class _HelpListPageState extends State<HelpListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.widget.title),
+        title: Center(child: Text("Swipe cards to give a hand")),
       ),
       body: Container(
         color: Colors.white,
@@ -47,7 +47,7 @@ class _HelpListPageState extends State<HelpListPage> {
                 children: _drawDraggableCards(),
               ),
             ),
-            HelpBar(),
+            ActionFooter(),
           ],
         ),
       ),
@@ -55,10 +55,9 @@ class _HelpListPageState extends State<HelpListPage> {
   }
 
   _loadCards() async {
-    List<Help> helps = await helpService.getHelp();
     setState(() {
       this.cards = new List();
-      helps.forEach((item) {
+      widget.helpRequests.forEach((item) {
         cards.add(new HelpCard(item));
       });
     });
@@ -79,8 +78,8 @@ class _HelpListPageState extends State<HelpListPage> {
               onDragEnd: (drag) {
                 if (drag.offset.dx.abs() > 30) {
                   var isDragRight = drag.offset.dx > 0;
-                  if(isDragRight){
-                    Navigator.of(context).pushNamed(AppRoutes.chat);
+                  if (isDragRight) {
+                    widget.onHelp();
                   } else {
                     setState(
                       () {
@@ -89,7 +88,6 @@ class _HelpListPageState extends State<HelpListPage> {
                       },
                     );
                   }
-                  
                 }
               },
               childWhenDragging: Container(),
@@ -106,65 +104,7 @@ class _HelpListPageState extends State<HelpListPage> {
       },
     );
 
-    //widgetCards.add(Positioned( left: 110, child: Text( 'a line of text' ) ));
     widgetCards.add(Text(''));
     return widgetCards;
-  }
-}
-
-class HelpBar extends StatelessWidget {
-  const HelpBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: (MediaQuery.of(context).size.width - 40) / 2,
-            color: Colors.white,
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  FaIcon(FontAwesomeIcons.stickyNote,
-                      color: Colors.lightBlueAccent),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Swipe Left for next card",
-                      style: TextStyle(color: Colors.lightBlueAccent),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: (MediaQuery.of(context).size.width - 40) / 2,
-            color: Colors.white,
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  FaIcon(
-                    FontAwesomeIcons.comments,
-                    color: Colors.lightBlueAccent,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Swipe Right to give a hand",
-                      style: TextStyle(color: Colors.lightBlueAccent),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

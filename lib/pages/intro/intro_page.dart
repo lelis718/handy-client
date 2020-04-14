@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:handyclientapp/app_routes.dart';
+import 'package:handyclientapp/model/card_info.dart';
 
 import 'widgets/intro_card.dart';
 
 class IntroPage extends StatefulWidget {
-  IntroPage({Key key, this.title}) : super(key: key);
+  final List<CardInfo> cardsInfo;
+  final VoidCallback onFinishCards;
 
-  final String title;
+  IntroPage({Key key, this.cardsInfo, this.onFinishCards}) : super(key: key);
 
   @override
   _IntroPageState createState() => _IntroPageState();
@@ -17,77 +17,32 @@ class _IntroPageState extends State<IntroPage> {
   List<IntroCard> cards = new List();
   List<Widget> widgetCards = new List();
 
-  @override
-  void initState() {
-    super.initState();
-    cards = new List();
-    cards.add(
-      new IntroCard(
-        "Welcome to Handy!",
-        FontAwesomeIcons.smileBeam,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Need some help?",
-        FontAwesomeIcons.questionCircle,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Add local and what you are planning to do",
-        FontAwesomeIcons.searchLocation,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Someone will receive your request to give you a hand!",
-        FontAwesomeIcons.smileWink,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Want to help someone?",
-        FontAwesomeIcons.peopleCarry,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Swipe between the cards for give a hand to someone. ",
-        FontAwesomeIcons.arrowsAltH,
-        Colors.lightBlueAccent,
-      ),
-    );
-    cards.add(
-      new IntroCard(
-        "Shall we begin?",
-        FontAwesomeIcons.smileBeam,
-        Colors.lightBlueAccent,
-      ),
-    );
+  _IntroPageState() {
+    for (final cardInfo in widget.cardsInfo) {
+      this.cards.add(
+            IntroCard(
+              color: cardInfo.color,
+              icon: cardInfo.icon,
+              title: cardInfo.title,
+            ),
+          );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text(this.widget.title),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text("Handy"),
         ),
-        body: Container(
-          color: Colors.white,
-          child: Center(
-            child: Stack(
-              alignment: Alignment.center,
-              children: _getIntroCards(),
-            ),
+      ),
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: _getIntroCards(),
           ),
         ),
       ),
@@ -111,7 +66,7 @@ class _IntroPageState extends State<IntroPage> {
                   () {
                     cards.removeAt(cards.length - (index + 1));
                     if (cards.length == 0) {
-                      Navigator.pushNamed(context, AppRoutes.helpSelector);
+                      widget.onFinishCards();
                     }
                   },
                 );

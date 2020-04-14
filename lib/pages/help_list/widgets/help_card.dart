@@ -27,7 +27,7 @@ class HelpCard {
           child: Column(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(top: 40, bottom:10),
+                padding: const EdgeInsets.only(top: 40, bottom: 10),
                 child: FaIcon(
                   FontAwesomeIcons.handPaper,
                   color: Colors.white,
@@ -38,12 +38,10 @@ class HelpCard {
                 padding: const EdgeInsets.all(25),
                 height: 280,
                 child: Center(
-
                   child: Text(
                     description,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

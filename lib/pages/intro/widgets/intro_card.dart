@@ -6,11 +6,7 @@ class IntroCard {
   IconData icon;
   Color color;
 
-  IntroCard(String title, IconData icon, Color color) {
-    this.title = title;
-    this.icon = icon;
-    this.color = color;
-  }
+  IntroCard({this.title, this.icon, this.color});
 
   Widget drawCard(bool rotate) {
     return Container(
