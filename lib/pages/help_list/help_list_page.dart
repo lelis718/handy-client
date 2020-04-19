@@ -20,6 +20,7 @@ class _HelpListPageState extends State<HelpListPage> {
   List<HelpCard> cards = new List();
   List<Widget> widgetCards = new List();
   HelpService helpService = locator<HelpService>();
+  int cardIndex = -1;
 
   @override
   void initState() {
@@ -40,14 +41,17 @@ class _HelpListPageState extends State<HelpListPage> {
             Container(
               width: 600,
               height: 500,
-              padding: EdgeInsets.symmetric(vertical: 40),
+              padding: EdgeInsets.symmetric(vertical: 0),
               color: Colors.white,
               child: Stack(
                 alignment: Alignment.center,
                 children: _drawDraggableCards(),
               ),
             ),
-            ActionFooter(),
+            ActionFooter(
+              onHelp: () => {widget.onHelp()},
+              onNextHelp: () => {_switchCards()},
+            ),
           ],
         ),
       ),
@@ -61,6 +65,15 @@ class _HelpListPageState extends State<HelpListPage> {
         cards.add(new HelpCard(item));
       });
     });
+  }
+
+  _switchCards() {
+    setState(
+      () {
+        var card = cards.removeAt(0);
+        cards.add(card);
+      },
+    );
   }
 
   List<Widget> _drawDraggableCards() {
@@ -81,12 +94,7 @@ class _HelpListPageState extends State<HelpListPage> {
                   if (isDragRight) {
                     widget.onHelp();
                   } else {
-                    setState(
-                      () {
-                        var card = cards.removeAt((cards.length - 1 - index));
-                        cards.add(card);
-                      },
-                    );
+                    _switchCards();
                   }
                 }
               },

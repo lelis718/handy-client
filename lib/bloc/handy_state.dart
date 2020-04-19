@@ -59,3 +59,12 @@ class LoadState extends HandyState {
   @override
   List<Object> get props => [];
 }
+class MyRequestsState extends HandyState {
+  final List<Help> helpRequests;
+
+  const MyRequestsState({@required this.helpRequests})
+      : assert(helpRequests != null);
+
+  @override
+  List<Object> get props => [helpRequests];
+}
