@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handyclientapp/bloc/handy_bloc.dart';
+import 'package:handyclientapp/pages/my_requests/my_requests_page.dart';
 import 'package:handyclientapp/pages/need_help/request_sucess_confirmation.dart';
-import 'package:handyclientapp/pages/widget/loading.dart';
+import 'package:handyclientapp/pages/widgets/loading.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'pages/pages.dart';
@@ -43,10 +44,19 @@ class HandyClient extends StatelessWidget {
           if (state is HandyLoggedInState) {
             return HelpSelectorPage(
               onSwipeLeft: () {
-                context.bloc<HandyBloc>().add(NeedHelpEvent());
+                context.bloc<HandyBloc>().add(WantToHelpEvent());
               },
               onSwipeRight: () {
+                context.bloc<HandyBloc>().add(NeedHelpEvent());
+              },
+              onHelpSomeoneTap: (){
                 context.bloc<HandyBloc>().add(WantToHelpEvent());
+              },
+              onMyRequestsTap: (){
+                context.bloc<HandyBloc>().add(MyRequestsEvent());
+              },
+              onRequestHelpTap: (){
+                context.bloc<HandyBloc>().add(NeedHelpEvent());
               },
             );
           }
@@ -91,6 +101,10 @@ class HandyClient extends StatelessWidget {
               },
             );
           }
+
+          if (state is MyRequestsState) {
+            return MyRequestsPage(helpRequests: state.helpRequests );
+          }          
         }),
       ),
     );
