@@ -19,24 +19,35 @@ class HelpRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        FaIcon(FontAwesomeIcons.handPointUp, color: Colors.white, size: 40.0),
-        Text(helpRequest.message,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            )),
+        Container(width:20, child: FaIcon(FontAwesomeIcons.handPointUp, color: Colors.white, size: 20.0)),
+        Container(
+          width: 50,
+          child: Text(helpRequest.message,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              )),
+        ),
         GestureDetector(
           onTap: onPeopleHelping,
-          child: FaIcon(FontAwesomeIcons.peopleCarry,
-              color: Colors.white, size: 40.0),
+          child: Container(
+            width: 20,
+            child: FaIcon(FontAwesomeIcons.peopleCarry,
+                color: Colors.white, size: 20.0),
+          ),
         ),
         GestureDetector(
           onTap: onMarkSomeoneHelping,
-          child: FaIcon(FontAwesomeIcons.user,
-              color: Colors.white, size: 40.0),
+          child: Container(
+            width: 20,
+            child: FaIcon(FontAwesomeIcons.user,
+                color: Colors.white, size: 20.0),
+          ),
         ),
         GestureDetector(
           onTap: onMarkSomeoneHelping,

@@ -9,15 +9,22 @@ class MyRequestsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: this.helpRequests.map((item) {
-        return HelpRequest(
-          helpRequest: item,
-          onMarkSomeoneHelping: null, //
-          onPeopleHelping: null, //
-          onResolveHelp: null, //
-        );
-      }).toList(),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          title: Center(child: Text("Manage your requests... ${this.helpRequests.length}")),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(20),
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: this.helpRequests.map((item) {
+              return HelpRequest(
+                helpRequest: item
+              );
+            }).toList(),
+          ),
+        ));
   }
 }
