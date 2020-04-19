@@ -11,18 +11,18 @@ class MyRequestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Manage your requests... ${this.helpRequests.length}")),
+          title: Center(
+              child:
+                  Text("Manage your requests")),
         ),
         body: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.only(top: 20),
           color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: this.helpRequests.map((item) {
-              return HelpRequest(
-                helpRequest: item
-              );
+              return HelpRequest(helpRequest: item);
             }).toList(),
           ),
         ));
