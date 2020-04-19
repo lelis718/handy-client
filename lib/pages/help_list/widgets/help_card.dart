@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/help.dart';
 
 class HelpCard {
   String description = "";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:handyclientapp/model/card_info.dart';
+import 'package:handyclientapp/models/card_info.dart';
 
 abstract class IntroService {
   List<CardInfo> getCards();

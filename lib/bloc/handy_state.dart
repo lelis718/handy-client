@@ -5,8 +5,12 @@ abstract class HandyState extends Equatable {
 }
 
 class HandyInitializingState extends HandyState {
+  final int secondsToFinish;
+
+  const HandyInitializingState({this.secondsToFinish = 0});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [secondsToFinish];
 }
 
 class HandyLoggedInState extends HandyState {

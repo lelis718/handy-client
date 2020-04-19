@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/help.dart';
 
 abstract class HelpService {
   Future<bool> askHelp(Help help);

@@ -6,29 +6,39 @@ import 'package:handyclientapp/pages/widget/loading.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'pages/pages.dart';
+import 'services/services.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(HandyClient());
+  runApp(
+    HandyClient(
+      handyBloc: HandyBloc(
+        deviceInfoService: locator<DeviceInfoService>(),
+        helpService: locator<HelpService>(),
+        introService: locator<IntroService>(),
+      ),
+    ),
+  );
 }
 
 class HandyClient extends StatelessWidget {
+  final HandyBloc handyBloc;
+
+  HandyClient({this.handyBloc});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (BuildContext context) => HandyBloc(),
+        create: (BuildContext context) => handyBloc,
         child: BlocBuilder<HandyBloc, HandyState>(builder: (context, state) {
           if (state is HandyInitializingState) {
             return SplashPage(
+              secondsToFinish: state.secondsToFinish,
               onFinish: () {
                 context.bloc<HandyBloc>().add(HandyInitializedEvent());
               },
             );
-          }
-
-          if (state is LoadState) {
-            return Loading();
           }
 
           if (state is HandyLoggedOutState) {
@@ -49,6 +59,10 @@ class HandyClient extends StatelessWidget {
                 context.bloc<HandyBloc>().add(WantToHelpEvent());
               },
             );
+          }
+
+          if (state is LoadState) {
+            return Loading();
           }
 
           if (state is WantToHelpState) {
@@ -91,6 +105,8 @@ class HandyClient extends StatelessWidget {
               },
             );
           }
+
+          return Container();
         }),
       ),
     );

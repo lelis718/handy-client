@@ -9,11 +9,11 @@ class RequestSucessConfirmation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AlertDialog(
-        title: new Text("Help posted with successfully"),
-        content: new Text("Alert Dialog body"),
+        title: new Text('Help posted with successfully'),
+        content: new Text('Alert Dialog body'),
         actions: <Widget>[
           new FlatButton(
-            child: new Text("Close"),
+            child: new Text('Close'),
             onPressed: onClose,
           ),
         ],

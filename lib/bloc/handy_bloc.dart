@@ -3,23 +3,21 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/card_info.dart';
-import 'package:handyclientapp/model/device_info.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/models.dart';
 import 'package:handyclientapp/services/services.dart';
-
-import '../service_locator.dart';
 
 part 'handy_event.dart';
 part 'handy_state.dart';
 
 class HandyBloc extends Bloc<HandyEvent, HandyState> {
-  final _deviceInfoService = locator<DeviceInfoService>();
-  final _helpService = locator<HelpService>();
-  final _introService = locator<IntroService>();
+  final DeviceInfoService deviceInfoService;
+  final HelpService helpService;
+  final IntroService introService;
+
+  HandyBloc({this.deviceInfoService, this.helpService, this.introService});
 
   @override
-  HandyState get initialState => HandyInitializingState();
+  HandyState get initialState => HandyInitializingState(secondsToFinish: 3);
 
   @override
   Stream<HandyState> mapEventToState(
@@ -30,27 +28,27 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is HandyInitializedEvent) {
-      final deviceInfo = await _deviceInfoService.getDeviceInfo();
+      final deviceInfo = await deviceInfoService.getDeviceInfo();
       if (deviceInfo.hasLoggedIn) {
         yield HandyLoggedInState();
       } else {
-        yield HandyLoggedOutState(cards: this._introService.getCards());
+        yield HandyLoggedOutState(cards: this.introService.getCards());
       }
     }
 
     if (event is WantToHelpEvent) {
       yield LoadState();
-      final helpRequests = await _helpService.getHelp();
+      final helpRequests = await helpService.getHelp();
       yield WantToHelpState(helpRequests: helpRequests);
     }
 
     if (event is NeedHelpEvent) {
-      final deviceInfo = await _deviceInfoService.getDeviceInfo();
+      final deviceInfo = await deviceInfoService.getDeviceInfo();
       yield NeedHelpState(deviceInfo: deviceInfo);
     }
 
     if (event is SendRequestEvent) {
-      final isSuccess = await _helpService.askHelp(event.helpRequest);
+      final isSuccess = await helpService.askHelp(event.helpRequest);
       yield RequestSentState(isSuccess: isSuccess);
     }
 
