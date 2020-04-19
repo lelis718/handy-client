@@ -67,6 +67,7 @@ class ChatPage extends StatelessWidget {
                       width: 20,
                     ),
                     RaisedButton(
+                      key: Key('ChatPage_RaisedButton_Back'),
                       color: Colors.blue,
                       onPressed: onReturning,
                       child: Text(

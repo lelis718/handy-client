@@ -3,12 +3,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/pages/widgets/action_footer_button.dart';
 
 class ActionFooter extends StatelessWidget {
-
   final VoidCallback onMyRequests;
   final VoidCallback onRequestHelp;
   final VoidCallback onHelpSomeone;
-  
-  const ActionFooter({@required this.onMyRequests, @required this.onRequestHelp, @required this.onHelpSomeone});
+
+  const ActionFooter(
+      {@required this.onMyRequests,
+      @required this.onRequestHelp,
+      @required this.onHelpSomeone});
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +21,22 @@ class ActionFooter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           ActionFooterButton(
+            key: Key('ActionFooter_RequestHelp'),
             iconButton: FontAwesomeIcons.handPaper,
-            textButton: "Request Help",
-            onTap: ()=> { this.onRequestHelp() },
+            textButton: 'Request Help',
+            onTap: () => this.onRequestHelp(),
           ),
           ActionFooterButton(
+            key: Key('ActionFooter_MyRequest'),
             iconButton: FontAwesomeIcons.list,
-            textButton: "My requests",
-            onTap: ()=> { this.onMyRequests() },
+            textButton: 'My requests',
+            onTap: () => this.onMyRequests(),
           ),
-         ActionFooterButton(
+          ActionFooterButton(
+            key: Key('ActionFooter_HelpSomeone'),
             iconButton: FontAwesomeIcons.handshake,
-            textButton: "Help Someone",
-            onTap: ()=> { this.onHelpSomeone() },
+            textButton: 'Help Someone',
+            onTap: () => this.onHelpSomeone(),
           ),
         ],
       ),

@@ -3,10 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/pages/widgets/action_footer_button.dart';
 
 class ActionFooter extends StatelessWidget {
-
   final VoidCallback onNextHelp;
   final VoidCallback onHelp;
-
 
   const ActionFooter({@required this.onNextHelp, @required this.onHelp});
 
@@ -17,17 +15,16 @@ class ActionFooter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-
         children: <Widget>[
           ActionFooterButton(
             iconButton: FontAwesomeIcons.stickyNote,
             textButton: "Swipe Left for next card",
-            onTap: ()=> { this.onNextHelp() },
+            onTap: () => this.onNextHelp(),
           ),
           ActionFooterButton(
             iconButton: FontAwesomeIcons.comments,
             textButton: "Swipe Right to give a hand",
-            onTap: ()=> { this.onHelp() },
+            onTap: () => this.onHelp(),
           ),
         ],
       ),

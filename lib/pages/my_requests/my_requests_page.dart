@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/help.dart';
 import 'package:handyclientapp/pages/my_requests/widgets/help_request.dart';
 
 class MyRequestsPage extends StatelessWidget {
@@ -11,9 +11,7 @@ class MyRequestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(
-              child:
-                  Text("Manage your requests")),
+          title: Center(child: Text('Manage your requests')),
         ),
         body: Container(
           padding: EdgeInsets.only(top: 20),

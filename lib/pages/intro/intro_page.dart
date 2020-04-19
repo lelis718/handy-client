@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/card_info.dart';
+import 'package:handyclientapp/models/card_info.dart';
 
 import 'widgets/intro_card.dart';
 

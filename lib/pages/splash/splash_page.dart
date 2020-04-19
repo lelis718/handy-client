@@ -2,10 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
+  final int secondsToFinish;
   final VoidCallback onFinish;
 
-  SplashPage({this.onFinish}) {
-    Timer(Duration(seconds: 3), onFinish);
+  SplashPage({this.onFinish, this.secondsToFinish}) {
+    if (this.secondsToFinish != null && this.secondsToFinish > 0) {
+      Timer(Duration(seconds: this.secondsToFinish), onFinish);
+    }
   }
 
   @override

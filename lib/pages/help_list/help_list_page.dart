@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/help.dart';
 import 'package:handyclientapp/pages/help_list/widgets/action_footer.dart';
 import 'package:handyclientapp/pages/help_list/widgets/help_card.dart';
-import 'package:handyclientapp/services/help_service.dart';
-
-import '../../service_locator.dart';
 
 class HelpListPage extends StatefulWidget {
   final List<Help> helpRequests;
@@ -19,7 +16,6 @@ class HelpListPage extends StatefulWidget {
 class _HelpListPageState extends State<HelpListPage> {
   List<HelpCard> cards = new List();
   List<Widget> widgetCards = new List();
-  HelpService helpService = locator<HelpService>();
   int cardIndex = -1;
 
   @override
@@ -32,7 +28,7 @@ class _HelpListPageState extends State<HelpListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Swipe cards to give a hand")),
+        title: Center(child: Text('Swipe cards to give a hand')),
       ),
       body: Container(
         color: Colors.white,
@@ -40,7 +36,7 @@ class _HelpListPageState extends State<HelpListPage> {
           children: <Widget>[
             Container(
               width: 600,
-              height: 500,
+              height: 450,
               padding: EdgeInsets.symmetric(vertical: 0),
               color: Colors.white,
               child: Stack(
@@ -49,8 +45,8 @@ class _HelpListPageState extends State<HelpListPage> {
               ),
             ),
             ActionFooter(
-              onHelp: () => {widget.onHelp()},
-              onNextHelp: () => {_switchCards()},
+              onHelp: () => widget.onHelp(),
+              onNextHelp: () => _switchCards(),
             ),
           ],
         ),

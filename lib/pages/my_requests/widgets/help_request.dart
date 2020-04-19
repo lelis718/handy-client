@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/help.dart';
 
 class HelpRequest extends StatelessWidget {
   final Help helpRequest;
@@ -23,7 +23,10 @@ class HelpRequest extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(width:40, child: FaIcon(FontAwesomeIcons.handPointUp, color: Colors.lightBlueAccent, size: 20.0)),
+          Container(
+              width: 40,
+              child: FaIcon(FontAwesomeIcons.handPointUp,
+                  color: Colors.lightBlueAccent, size: 20.0)),
           Container(
             width: 200,
             child: Text(helpRequest.message,

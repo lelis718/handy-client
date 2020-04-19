@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/model/device_info.dart';
-import 'package:handyclientapp/model/help.dart';
+import 'package:handyclientapp/models/models.dart';
 
 class NeedHelpPage extends StatelessWidget {
   final VoidCallback onReturning;
@@ -25,6 +24,7 @@ class NeedHelpPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
+                key: Key('NeedHelpPage_RaisedButton_TextForm'),
                 maxLines: 10,
                 decoration: InputDecoration(
                   hintText: 'I need help to do ....',
@@ -52,6 +52,7 @@ class NeedHelpPage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     RaisedButton(
+                      key: Key('NeedHelpPage_RaisedButton_Ask'),
                       color: Colors.blue,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
@@ -73,6 +74,7 @@ class NeedHelpPage extends StatelessWidget {
                       width: 20,
                     ),
                     RaisedButton(
+                      key: Key('NeedHelpPage_RaisedButton_Back'),
                       color: Colors.blue,
                       onPressed: onReturning,
                       child: Text(

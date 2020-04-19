@@ -7,29 +7,39 @@ import 'package:handyclientapp/pages/widgets/loading.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'pages/pages.dart';
+import 'services/services.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(HandyClient());
+  runApp(
+    HandyClient(
+      handyBloc: HandyBloc(
+        deviceInfoService: locator<DeviceInfoService>(),
+        helpService: locator<HelpService>(),
+        introService: locator<IntroService>(),
+      ),
+    ),
+  );
 }
 
 class HandyClient extends StatelessWidget {
+  final HandyBloc handyBloc;
+
+  HandyClient({this.handyBloc});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (BuildContext context) => HandyBloc(),
+        create: (BuildContext context) => handyBloc,
         child: BlocBuilder<HandyBloc, HandyState>(builder: (context, state) {
           if (state is HandyInitializingState) {
             return SplashPage(
+              secondsToFinish: state.secondsToFinish,
               onFinish: () {
                 context.bloc<HandyBloc>().add(HandyInitializedEvent());
               },
             );
-          }
-
-          if (state is LoadState) {
-            return Loading();
           }
 
           if (state is HandyLoggedOutState) {
@@ -49,16 +59,20 @@ class HandyClient extends StatelessWidget {
               onSwipeRight: () {
                 context.bloc<HandyBloc>().add(NeedHelpEvent());
               },
-              onHelpSomeoneTap: (){
-                context.bloc<HandyBloc>().add(WantToHelpEvent());
-              },
-              onMyRequestsTap: (){
-                context.bloc<HandyBloc>().add(MyRequestsEvent());
-              },
-              onRequestHelpTap: (){
+              onRequestHelpTap: () {
                 context.bloc<HandyBloc>().add(NeedHelpEvent());
               },
+              onMyRequestsTap: () {
+                context.bloc<HandyBloc>().add(MyRequestsEvent());
+              },
+              onHelpSomeoneTap: () {
+                context.bloc<HandyBloc>().add(WantToHelpEvent());
+              },
             );
+          }
+
+          if (state is LoadState) {
+            return Loading();
           }
 
           if (state is WantToHelpState) {
@@ -103,8 +117,10 @@ class HandyClient extends StatelessWidget {
           }
 
           if (state is MyRequestsState) {
-            return MyRequestsPage(helpRequests: state.helpRequests );
-          }          
+            return MyRequestsPage(helpRequests: state.helpRequests);
+          }
+
+          return Container();
         }),
       ),
     );

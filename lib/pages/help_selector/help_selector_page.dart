@@ -21,7 +21,7 @@ class HelpSelectorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("What do you want to do?")),
+        title: Center(child: Text('What do you want to do?')),
       ),
       body: Container(
         color: Colors.white,
@@ -76,8 +76,8 @@ class HelpSelectorPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            NeedHelp(),
-            WannaHelp(),
+            Expanded(child: NeedHelp()),
+            Expanded(child: WannaHelp()),
           ],
         ),
       ),

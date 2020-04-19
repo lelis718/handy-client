@@ -5,7 +5,9 @@ abstract class HandyEvent extends Equatable {
 }
 
 class HandyInitializingEvent extends HandyEvent {
-  const HandyInitializingEvent();
+  final int secondsToFinish;
+
+  const HandyInitializingEvent({this.secondsToFinish = 0});
 
   @override
   List<Object> get props => null;

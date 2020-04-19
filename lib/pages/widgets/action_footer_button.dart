@@ -7,12 +7,15 @@ class ActionFooterButton extends StatelessWidget {
   final String textButton;
   final IconData iconButton;
 
-  const ActionFooterButton({this.textButton, this.iconButton, this.onTap});
+  ActionFooterButton({Key key, this.textButton, this.iconButton, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () { onTap(); },
+      onTap: () {
+        onTap();
+      },
       child: Container(
         color: Colors.white,
         child: Center(

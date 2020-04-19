@@ -1,6 +1,8 @@
-class Help {
-  String user;
-  String message;
+import 'package:equatable/equatable.dart';
+
+class Help extends Equatable {
+  final String user;
+  final String message;
 
   Help({
     this.user,
@@ -18,4 +20,7 @@ class Help {
         'user': this.user,
         'message': this.message,
       };
+
+  @override
+  List<Object> get props => [user, message];
 }

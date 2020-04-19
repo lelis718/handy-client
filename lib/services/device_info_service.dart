@@ -1,5 +1,5 @@
 import 'package:flutter_udid/flutter_udid.dart';
-import 'package:handyclientapp/model/device_info.dart';
+import 'package:handyclientapp/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class DeviceInfoService {
@@ -7,7 +7,6 @@ abstract class DeviceInfoService {
 }
 
 class DeviceInfoServiceDefault extends DeviceInfoService {
-  
   @override
   Future<DeviceInfo> getDeviceInfo() async {
     String uniqueId = await FlutterUdid.udid;
