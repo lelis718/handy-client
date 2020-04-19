@@ -1,10 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/main.dart';
 import 'package:handyclientapp/models/models.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/need_help.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/wanna_help.dart';
+import 'package:handyclientapp/pages/my_requests/widgets/help_request.dart';
 import 'package:handyclientapp/pages/need_help/request_sucess_confirmation.dart';
 import 'package:handyclientapp/pages/widgets/loading.dart';
 import 'package:mockito/mockito.dart';
@@ -184,6 +186,24 @@ void main() {
 
       //Assert
       expect(find.byType(ChatPage), findsOneWidget);
+    });
+
+    testWidgets('Shows my help requests pages', (WidgetTester tester) async {
+      //Arrange
+      when(bloc.state).thenAnswer(
+        (_) => MyRequestsState(helpRequests: [
+          Help(message: 'Bazinga', user: 'bazingaUser'),
+        ]),
+      );
+
+      //Act
+      await tester.pumpWidget(HandyClient(handyBloc: bloc));
+
+      //Assert
+      expect(find.byType(MyRequestsPage), findsOneWidget);
+      expect(find.text('Manage your requests'), findsOneWidget);
+      expect(find.byType(HelpRequest), findsOneWidget);
+      expect(find.byType(FaIcon), findsNWidgets(4));
     });
   });
 }
