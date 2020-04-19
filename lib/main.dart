@@ -59,14 +59,14 @@ class HandyClient extends StatelessWidget {
               onSwipeRight: () {
                 context.bloc<HandyBloc>().add(NeedHelpEvent());
               },
-              onHelpSomeoneTap: () {
-                context.bloc<HandyBloc>().add(WantToHelpEvent());
+              onRequestHelpTap: () {
+                context.bloc<HandyBloc>().add(NeedHelpEvent());
               },
               onMyRequestsTap: () {
                 context.bloc<HandyBloc>().add(MyRequestsEvent());
               },
-              onRequestHelpTap: () {
-                context.bloc<HandyBloc>().add(NeedHelpEvent());
+              onHelpSomeoneTap: () {
+                context.bloc<HandyBloc>().add(WantToHelpEvent());
               },
             );
           }

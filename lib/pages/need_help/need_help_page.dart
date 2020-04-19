@@ -24,6 +24,7 @@ class NeedHelpPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
+                key: Key('NeedHelpPage_RaisedButton_TextForm'),
                 maxLines: 10,
                 decoration: InputDecoration(
                   hintText: 'I need help to do ....',

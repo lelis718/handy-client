@@ -13,6 +13,7 @@ class RequestSucessConfirmation extends StatelessWidget {
         content: new Text('Alert Dialog body'),
         actions: <Widget>[
           new FlatButton(
+            key: Key('RequestSucessConfirmation_AlertDialog'),
             child: new Text('Close'),
             onPressed: onClose,
           ),
