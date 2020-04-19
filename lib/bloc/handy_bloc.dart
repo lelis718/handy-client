@@ -32,7 +32,8 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
       if (deviceInfo.hasLoggedIn) {
         yield HandyLoggedInState();
       } else {
-        yield HandyLoggedOutState(cards: this.introService.getCards());
+        final cardsInfo = this.introService.getCards();
+        yield HandyLoggedOutState(cards: cardsInfo);
       }
     }
 
