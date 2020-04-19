@@ -10,12 +10,12 @@ class HandyInitializingState extends HandyState {
   const HandyInitializingState({this.secondsToFinish = 0});
 
   @override
-  List<Object> get props => [secondsToFinish];
+  List get props => [secondsToFinish];
 }
 
 class HandyLoggedInState extends HandyState {
   @override
-  List<Object> get props => [];
+  List get props => [];
 }
 
 class HandyLoggedOutState extends HandyState {
@@ -24,7 +24,7 @@ class HandyLoggedOutState extends HandyState {
   HandyLoggedOutState({this.cards});
 
   @override
-  List<Object> get props => [cards];
+  List get props => [cards];
 }
 
 class NeedHelpState extends HandyState {
@@ -32,7 +32,7 @@ class NeedHelpState extends HandyState {
 
   const NeedHelpState({this.deviceInfo});
   @override
-  List<Object> get props => [deviceInfo];
+  List get props => [deviceInfo];
 }
 
 class WantToHelpState extends HandyState {
@@ -42,7 +42,7 @@ class WantToHelpState extends HandyState {
       : assert(helpRequests != null);
 
   @override
-  List<Object> get props => [helpRequests];
+  List get props => [helpRequests];
 }
 
 class RequestSentState extends HandyState {
@@ -51,15 +51,15 @@ class RequestSentState extends HandyState {
   const RequestSentState({this.isSuccess});
 
   @override
-  List<Object> get props => [isSuccess];
+  List get props => [isSuccess];
 }
 
 class StartChatState extends HandyState {
   @override
-  List<Object> get props => [];
+  List get props => [];
 }
 
 class LoadState extends HandyState {
   @override
-  List<Object> get props => [];
+  List get props => [];
 }

@@ -24,7 +24,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     HandyEvent event,
   ) async* {
     if (event is HandyInitializingEvent) {
-      HandyInitializingState();
+      yield HandyInitializingState();
     }
 
     if (event is HandyInitializedEvent) {
