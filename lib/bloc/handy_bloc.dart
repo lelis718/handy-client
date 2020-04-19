@@ -39,6 +39,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is WantToHelpEvent) {
+      yield LoadState();
       final helpRequests = await _helpService.getHelp();
       yield WantToHelpState(helpRequests: helpRequests);
     }

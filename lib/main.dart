@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handyclientapp/bloc/handy_bloc.dart';
 import 'package:handyclientapp/pages/need_help/request_sucess_confirmation.dart';
+import 'package:handyclientapp/pages/widget/loading.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'pages/pages.dart';
@@ -24,6 +25,10 @@ class HandyClient extends StatelessWidget {
                 context.bloc<HandyBloc>().add(HandyInitializedEvent());
               },
             );
+          }
+
+          if (state is LoadState) {
+            return Loading();
           }
 
           if (state is HandyLoggedOutState) {

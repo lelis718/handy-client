@@ -54,3 +54,8 @@ class StartChatState extends HandyState {
   @override
   List<Object> get props => [];
 }
+
+class LoadState extends HandyState {
+  @override
+  List<Object> get props => [];
+}
