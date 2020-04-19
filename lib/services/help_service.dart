@@ -11,7 +11,7 @@ abstract class HelpService {
 
 class HelpServiceDefault extends HelpService {
   final address = "https://us-central1-handy-app-ad6a5.cloudfunctions.net";
-  
+
   @override
   Future<bool> askHelp(Help help) async {
     var response = await http.post("$address/app/help", body: help.toJson());
@@ -35,7 +35,7 @@ class HelpServiceDefault extends HelpService {
 
   @override
   Future<List<Help>> getHelpFrom(String userId) async {
-    var response = await http.get("${address}/app/helpFrom/${userId}");
+    var response = await http.get("$address/app/helpFrom/$userId");
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
       List<Help> helps = List<Help>();

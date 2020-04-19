@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/main.dart';
 import 'package:handyclientapp/models/models.dart';
-import 'package:handyclientapp/pages/help_list/widgets/action_footer.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/need_help.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/wanna_help.dart';
 import 'package:handyclientapp/pages/my_requests/widgets/help_request.dart';

@@ -45,8 +45,8 @@ class _HelpListPageState extends State<HelpListPage> {
               ),
             ),
             ActionFooter(
-              onHelp: () => {widget.onHelp()},
-              onNextHelp: () => {_switchCards()},
+              onHelp: () => widget.onHelp(),
+              onNextHelp: () => _switchCards(),
             ),
           ],
         ),
