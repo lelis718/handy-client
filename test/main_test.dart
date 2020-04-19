@@ -6,7 +6,7 @@ import 'package:handyclientapp/models/models.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/need_help.dart';
 import 'package:handyclientapp/pages/help_selector/widgets/wanna_help.dart';
 import 'package:handyclientapp/pages/need_help/request_sucess_confirmation.dart';
-import 'package:handyclientapp/pages/widget/loading.dart';
+import 'package:handyclientapp/pages/widgets/loading.dart';
 import 'package:mockito/mockito.dart';
 import 'package:handyclientapp/pages/pages.dart';
 import 'package:handyclientapp/bloc/handy_bloc.dart';
