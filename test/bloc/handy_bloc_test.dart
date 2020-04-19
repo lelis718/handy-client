@@ -48,6 +48,20 @@ void main() {
     });
 
     blocTest(
+      'On the re initializing',
+      build: () {
+        when(deviceInfoService.getDeviceInfo()).thenAnswer(
+          (_) => Future.value(deviceUserLoggedIn),
+        );
+        return handyBloc;
+      },
+      act: (bloc) => bloc.add(HandyInitializingEvent()),
+      expect: [
+        HandyInitializingState(secondsToFinish: defaultSecondsToFinish),
+        HandyInitializingState()
+      ],
+    );
+    blocTest(
       'Initialize the app with user logged in',
       build: () {
         when(deviceInfoService.getDeviceInfo()).thenAnswer(
@@ -130,6 +144,26 @@ void main() {
       expect: [
         HandyInitializingState(secondsToFinish: defaultSecondsToFinish),
         StartChatState(),
+      ],
+    );
+
+    blocTest(
+      'When the user wants to see their requests',
+      build: () {
+        when(deviceInfoService.getDeviceInfo()).thenAnswer(
+          (_) => Future.value(DeviceInfo(uuid: 'BazingaUser')),
+        );
+
+        when(helpService.getHelpFrom('BazingaUser')).thenAnswer(
+          (_) => Future.value(helpRequests),
+        );
+        return handyBloc;
+      },
+      act: (bloc) => bloc.add(MyRequestsEvent()),
+      expect: [
+        HandyInitializingState(secondsToFinish: defaultSecondsToFinish),
+        LoadState(),
+        MyRequestsState(helpRequests: helpRequests)
       ],
     );
   });
