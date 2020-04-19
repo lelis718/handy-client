@@ -1,11 +1,11 @@
-
 import 'package:get_it/get_it.dart';
-import 'package:handyclientapp/services/device_info_service.dart';
-import 'package:handyclientapp/services/help_service.dart';
+import 'services/services.dart';
 
 GetIt locator = GetIt.instance;
 
 setupServiceLocator() {
-  locator.registerLazySingleton<DeviceInfoService>(() => DeviceInfoServiceDefault());
+  locator.registerLazySingleton<DeviceInfoService>(
+      () => DeviceInfoServiceDefault());
   locator.registerLazySingleton<HelpService>(() => HelpServiceDefault());
+  locator.registerLazySingleton<IntroService>(() => IntroServiceDefault());
 }

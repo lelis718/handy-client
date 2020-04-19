@@ -1,49 +1,40 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/app_routes.dart';
-import 'package:handyclientapp/services/help_service.dart';
 import 'widgets/widgets.dart';
 
-class HelpSelectorPage extends StatefulWidget {
-  HelpSelectorPage({Key key, this.title}) : super(key: key);
+class HelpSelectorPage extends StatelessWidget {
+  final VoidCallback onSwipeLeft;
+  final VoidCallback onSwipeRight;
 
-  final String title;
+  const HelpSelectorPage({this.onSwipeLeft, this.onSwipeRight});
 
-  @override
-  _HelpSelectorPageState createState() => _HelpSelectorPageState();
-}
-
-class _HelpSelectorPageState extends State<HelpSelectorPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text(this.widget.title),
-          ),
-        ),
-        body: Center(
-          child: Draggable(
-            onDragEnd: (drag) {
-              if (drag.offset.dx.abs() > 30) {
-                var isDragRight = drag.offset.dx > 0;
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("What do you want to do?")),
+      ),
+      body: Center(
+        child: Draggable(
+          onDragEnd: (drag) {
+            if (drag.offset.dx.abs() > 30) {
+              var isDragRight = drag.offset.dx > 0;
 
-                Navigator.of(context).pushNamed(
-                    isDragRight ? AppRoutes.needHelp : AppRoutes.helpList);
+              if (isDragRight) {
+                onSwipeRight();
+              } else {
+                onSwipeLeft();
               }
-            },
-            childWhenDragging: Container(),
-            feedback: buildCard(),
-            child: buildCard(),
-          ),
+            }
+          },
+          childWhenDragging: Container(),
+          feedback: _buildCard(),
+          child: _buildCard(),
         ),
       ),
     );
   }
 
-  Card buildCard() {
+  Card _buildCard() {
     return Card(
       elevation: 12,
       color: Colors.lightBlueAccent,

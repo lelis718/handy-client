@@ -1,13 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 
-class SplashPage extends StatelessWidget {
-  final VoidCallback onFinish;
-
-  SplashPage({this.onFinish}) {
-    Timer(Duration(seconds: 3), onFinish);
-  }
-
+class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +19,7 @@ class SplashPage extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 16),
                 child: Text(
-                  'Initializing...',
+                  'Loading...',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     decoration: TextDecoration.none,
