@@ -56,5 +56,13 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     if (event is StartChatEvent) {
       yield StartChatState();
     }
+
+     if (event is MyRequestsEvent) {
+      yield LoadState();
+      final currentDevice = await _deviceInfoService.getDeviceInfo();
+      final userId = currentDevice.uuid;
+      final myHelpRequests = await _helpService.getHelpFrom(userId);
+      yield MyRequestsState(helpRequests: myHelpRequests);
+    }
   }
 }

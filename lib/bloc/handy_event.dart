@@ -47,3 +47,9 @@ class StartChatEvent extends HandyEvent {
   @override
   List<Object> get props => null;
 }
+class MyRequestsEvent extends HandyEvent {
+  const MyRequestsEvent();
+
+  @override
+  List<Object> get props => null;
+}
