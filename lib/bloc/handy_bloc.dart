@@ -56,7 +56,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is StartChatEvent) {
-      final messages = _getMessages();
+      final messages = helpService.getChatMessages();
       final deviceInfo = await this._getDeviceInfo();
       yield StartChatState(
           help: event.help, messages: messages, deviceInfo: deviceInfo);
@@ -75,43 +75,5 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
       _deviceInfo = await deviceInfoService.getDeviceInfo();
     }
     return _deviceInfo;
-  }
-
-  List<ChatMessage> _getMessages() {
-    var list = List<ChatMessage>();
-
-    list.add(
-      ChatMessage(
-        userId: '17914a249e51be07',
-        message: 'Thank you',
-        date: DateTime.now().subtract(Duration(minutes: 19)),
-      ),
-    );
-
-    list.add(
-      ChatMessage(
-        userId: '4645648abf432sffda2',
-        message: 'Yeah, sure',
-        date: DateTime.now().subtract(Duration(minutes: 28)),
-      ),
-    );
-
-    list.add(
-      ChatMessage(
-        userId: '17914a249e51be07',
-        message: 'Hello, are you going to help me',
-        date: DateTime.now().subtract(Duration(minutes: 39)),
-      ),
-    );
-
-    list.add(
-      ChatMessage(
-        userId: '4645648abf432sffda2',
-        message: 'Hello',
-        date: DateTime.now().subtract(Duration(minutes: 40)),
-      ),
-    );
-
-    return list;
   }
 }

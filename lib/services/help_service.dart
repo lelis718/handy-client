@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:handyclientapp/models/models.dart';
 import 'package:http/http.dart' as http;
 import 'package:handyclientapp/models/help.dart';
 import 'package:http/http.dart';
@@ -9,6 +10,7 @@ abstract class HelpService {
   Future<bool> askHelp(Help help);
   Future<List<Help>> getOtherHelpRequests(String userId);
   Future<List<Help>> getMyHelpRequests(String userId);
+  List<ChatMessage> getChatMessages();
 }
 
 class HelpServiceDefault extends HelpService {
@@ -33,6 +35,45 @@ class HelpServiceDefault extends HelpService {
   Future<List<Help>> getMyHelpRequests(String userId) async {
     final response = await http.get("$address/app/help/my/$userId");
     return _formatHelpRequest(response);
+  }
+
+  @override
+  List<ChatMessage> getChatMessages() {
+    var list = List<ChatMessage>();
+
+    list.add(
+      ChatMessage(
+        userId: '17914a249e51be07',
+        message: 'Thank you',
+        date: DateTime.now().subtract(Duration(minutes: 19)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '4645648abf432sffda2',
+        message: 'Yeah, sure',
+        date: DateTime.now().subtract(Duration(minutes: 28)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '17914a249e51be07',
+        message: 'Hello, are you going to help me',
+        date: DateTime.now().subtract(Duration(minutes: 39)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '4645648abf432sffda2',
+        message: 'Hello',
+        date: DateTime.now().subtract(Duration(minutes: 40)),
+      ),
+    );
+
+    return list;
   }
 
   List<Help> _formatHelpRequest(Response response) {
