@@ -26,6 +26,7 @@ class ChatPage extends StatelessWidget {
         leading: null,
         actions: <Widget>[
           IconButton(
+              key: Key('ChatPage_IconButton_Back'),
               icon: Icon(Icons.close),
               onPressed: () {
                 onReturning();
