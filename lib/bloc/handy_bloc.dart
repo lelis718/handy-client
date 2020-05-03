@@ -13,6 +13,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
   final DeviceInfoService deviceInfoService;
   final HelpService helpService;
   final IntroService introService;
+  DeviceInfo _deviceInfo;
 
   HandyBloc({this.deviceInfoService, this.helpService, this.introService});
 
@@ -28,7 +29,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is HandyInitializedEvent) {
-      final deviceInfo = await deviceInfoService.getDeviceInfo();
+      final deviceInfo = await this._getDeviceInfo();
       if (deviceInfo.hasLoggedIn) {
         yield HandyLoggedInState();
       } else {
@@ -39,12 +40,13 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
 
     if (event is WantToHelpEvent) {
       yield LoadState();
-      final helpRequests = await helpService.getHelp();
+      final userId = (await this._getDeviceInfo()).uuid;
+      final helpRequests = await helpService.getOtherHelpRequests(userId);
       yield WantToHelpState(helpRequests: helpRequests);
     }
 
     if (event is NeedHelpEvent) {
-      final deviceInfo = await deviceInfoService.getDeviceInfo();
+      final deviceInfo = await this._getDeviceInfo();
       yield NeedHelpState(deviceInfo: deviceInfo);
     }
 
@@ -54,15 +56,62 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is StartChatEvent) {
-      yield StartChatState();
+      final messages = _getMessages();
+      final deviceInfo = await this._getDeviceInfo();
+      yield StartChatState(
+          help: event.help, messages: messages, deviceInfo: deviceInfo);
     }
 
     if (event is MyRequestsEvent) {
       yield LoadState();
-      final currentDevice = await deviceInfoService.getDeviceInfo();
-      final userId = currentDevice.uuid;
-      final myHelpRequests = await helpService.getHelpFrom(userId);
+      final userId = (await this._getDeviceInfo()).uuid;
+      final myHelpRequests = await helpService.getMyHelpRequests(userId);
       yield MyRequestsState(helpRequests: myHelpRequests);
     }
+  }
+
+  Future<DeviceInfo> _getDeviceInfo() async {
+    if (_deviceInfo == null || _deviceInfo.hasLoggedIn == false) {
+      _deviceInfo = await deviceInfoService.getDeviceInfo();
+    }
+    return _deviceInfo;
+  }
+
+  List<ChatMessage> _getMessages() {
+    var list = List<ChatMessage>();
+
+    list.add(
+      ChatMessage(
+        userId: '17914a249e51be07',
+        message: 'Thank you',
+        date: DateTime.now().subtract(Duration(minutes: 19)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '4645648abf432sffda2',
+        message: 'Yeah, sure',
+        date: DateTime.now().subtract(Duration(minutes: 28)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '17914a249e51be07',
+        message: 'Hello, are you going to help me',
+        date: DateTime.now().subtract(Duration(minutes: 39)),
+      ),
+    );
+
+    list.add(
+      ChatMessage(
+        userId: '4645648abf432sffda2',
+        message: 'Hello',
+        date: DateTime.now().subtract(Duration(minutes: 40)),
+      ),
+    );
+
+    return list;
   }
 }

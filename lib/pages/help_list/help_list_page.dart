@@ -5,7 +5,7 @@ import 'package:handyclientapp/pages/help_list/widgets/help_card.dart';
 
 class HelpListPage extends StatefulWidget {
   final List<Help> helpRequests;
-  final VoidCallback onHelp;
+  final Function(Help) onHelp;
   HelpListPage({Key key, @required this.helpRequests, this.onHelp})
       : super(key: key);
 
@@ -45,7 +45,10 @@ class _HelpListPageState extends State<HelpListPage> {
               ),
             ),
             ActionFooter(
-              onHelp: () => widget.onHelp(),
+              onHelp: () {
+                final help = widget.helpRequests[0];
+                widget.onHelp(help);
+              },
               onNextHelp: () => _switchCards(),
             ),
           ],
@@ -88,7 +91,8 @@ class _HelpListPageState extends State<HelpListPage> {
                 if (drag.offset.dx.abs() > 30) {
                   var isDragRight = drag.offset.dx > 0;
                   if (isDragRight) {
-                    widget.onHelp();
+                    final help = widget.helpRequests[0];
+                    widget.onHelp(help);
                   } else {
                     _switchCards();
                   }

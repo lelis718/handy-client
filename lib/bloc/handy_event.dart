@@ -44,12 +44,24 @@ class SendRequestEvent extends HandyEvent {
 }
 
 class StartChatEvent extends HandyEvent {
+  final Help help;
+
+  const StartChatEvent({this.help});
   @override
-  List<Object> get props => null;
+  List<Object> get props => [help];
 }
+
 class MyRequestsEvent extends HandyEvent {
   const MyRequestsEvent();
 
   @override
   List<Object> get props => null;
+}
+
+class SendChatMessageEvent extends HandyEvent {
+  final String message;
+
+  const SendChatMessageEvent({this.message});
+  @override
+  List<Object> get props => [message];
 }
