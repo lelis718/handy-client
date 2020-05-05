@@ -1,89 +1,105 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:handyclientapp/models/models.dart';
 
 class ChatPage extends StatelessWidget {
+  final Help help;
   final VoidCallback onReturning;
+  final Function(String) onSendMessage;
+  final List<ChatMessage> messages;
+  final DeviceInfo deviceInfo;
 
-  ChatPage({this.onReturning});
-
-  final _formKey = GlobalKey<FormState>();
+  ChatPage({
+    this.onReturning,
+    this.help,
+    this.onSendMessage,
+    this.messages,
+    this.deviceInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
+    String message;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat with who needs help (WIP)'),
+        title: Text('Chat'),
+        leading: null,
+        actions: <Widget>[
+          IconButton(
+              key: Key('ChatPage_IconButton_Back'),
+              icon: Icon(Icons.close),
+              onPressed: () {
+                onReturning();
+              }),
+        ],
       ),
-      body: Container(
-        margin: EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                maxLines: 10,
-                decoration: InputDecoration(
-                  hintText: 'Send a message!',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.pink,
-                      style: BorderStyle.solid,
-                      width: 10,
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'We need to know what do you neeed';
-                  }
-                  log(value);
-                  return null;
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  children: <Widget>[
-                    RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Processing Data'),
-                            ),
-                          );
-                        }
-                      },
-                      child: Text(
-                        'Message (WIP)',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    RaisedButton(
-                      key: Key('ChatPage_RaisedButton_Back'),
-                      color: Colors.blue,
-                      onPressed: onReturning,
-                      child: Text(
-                        'Back',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: Column(
+        children: <Widget>[
+          _buildListMessages(),
+          _buildInput(message),
+        ],
       ),
     );
+  }
+
+  Widget _buildListMessages() {
+    return Expanded(
+      child: ListView.builder(
+        reverse: true,
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          final isMyMessage = messages[index].userId == this.deviceInfo.uuid;
+
+          return ListTile(
+            title: Text(
+              messages[index].message,
+              textAlign: isMyMessage ? TextAlign.right : TextAlign.left,
+            ),
+            subtitle: Text(
+              '${isMyMessage ? 'me' : messages[index].userId} - ${_formatDate(messages[index].date)}',
+              textAlign: isMyMessage ? TextAlign.right : TextAlign.left,
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildInput(String message) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+          child: TextField(
+            onChanged: (value) {
+              message = value;
+            },
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              hintText: 'Type your message here...',
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+        FlatButton(
+          onPressed: () {
+            this.onSendMessage(message);
+          },
+          child: Text(
+            'Send',
+            style: TextStyle(
+              color: Colors.lightBlueAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:';
   }
 }

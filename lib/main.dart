@@ -78,8 +78,8 @@ class HandyClient extends StatelessWidget {
           if (state is WantToHelpState) {
             return HelpListPage(
               helpRequests: state.helpRequests,
-              onHelp: () {
-                context.bloc<HandyBloc>().add(StartChatEvent());
+              onHelp: (help) {
+                context.bloc<HandyBloc>().add(StartChatEvent(help: help));
               },
             );
           }
@@ -110,8 +110,14 @@ class HandyClient extends StatelessWidget {
 
           if (state is StartChatState) {
             return ChatPage(
+              help: state.help,
+              messages: state.messages,
+              deviceInfo: state.deviceInfo,
               onReturning: () {
                 context.bloc<HandyBloc>().add(HandyInitializedEvent());
+              },
+              onSendMessage: (message) {
+                context.bloc<HandyBloc>().add(SendChatMessageEvent());
               },
             );
           }
