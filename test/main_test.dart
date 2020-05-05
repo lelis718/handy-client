@@ -260,11 +260,11 @@ void main() {
     testWidgets('After drag the last help card calls the correct event',
         (WidgetTester tester) async {
       //Arrange
+      final helpRequests = [Help(message: 'Bazinga', user: 'bazingaUser')];
+
       when(bloc.state).thenAnswer(
         (_) => WantToHelpState(
-          helpRequests: [
-            Help(message: 'Bazinga', user: 'bazingaUser'),
-          ],
+          helpRequests: helpRequests,
         ),
       );
 
@@ -276,7 +276,7 @@ void main() {
       //Assert
       verify(
         bloc.add(
-          StartChatEvent(),
+          StartChatEvent(help: helpRequests.first),
         ),
       ).called(1);
     });
@@ -391,7 +391,14 @@ void main() {
     testWidgets('Shows chat page', (WidgetTester tester) async {
       //Arrange
       when(bloc.state).thenAnswer(
-        (_) => StartChatState(),
+        (_) => StartChatState(
+          deviceInfo: DeviceInfo(hasLoggedIn: true, uuid: 'a'),
+          help: Help(id: '1', message: '2', user: '3'),
+          messages: [
+            ChatMessage(date: DateTime.now(), message: 'd', userId: '4'),
+            ChatMessage(date: DateTime.now(), message: 'e', userId: 'a')
+          ],
+        ),
       );
 
       //Act
@@ -404,12 +411,19 @@ void main() {
     testWidgets('Back button in chat page calls the correct event',
         (WidgetTester tester) async {
       when(bloc.state).thenAnswer(
-        (_) => StartChatState(),
+        (_) => StartChatState(
+          deviceInfo: DeviceInfo(hasLoggedIn: true, uuid: 'a'),
+          help: Help(id: '1', message: '2', user: '3'),
+          messages: [
+            ChatMessage(date: DateTime.now(), message: 'd', userId: '4'),
+            ChatMessage(date: DateTime.now(), message: 'e', userId: 'a')
+          ],
+        ),
       );
 
       //Act
       await tester.pumpWidget(HandyClient(handyBloc: bloc));
-      await tester.tap(find.byKey(Key('ChatPage_RaisedButton_Back')));
+      await tester.tap(find.byKey(Key('ChatPage_IconButton_Back')));
       await tester.pump();
 
       //Assert

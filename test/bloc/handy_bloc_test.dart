@@ -25,8 +25,12 @@ void main() {
     ];
 
     final helpRequests = [Help(message: 'Bazinga', user: 'DoubleBazinga')];
-    final deviceUserLoggedIn = DeviceInfo(hasLoggedIn: true);
+    final deviceUserLoggedIn = DeviceInfo(hasLoggedIn: true, uuid: '1');
     final deviceUserNotLoggedIn = DeviceInfo(hasLoggedIn: false);
+
+    final chatMessages = [
+      ChatMessage(date: DateTime.now(), message: 'a', userId: 'b')
+    ];
 
     setUp(() {
       handyBloc = HandyBloc(
@@ -61,6 +65,7 @@ void main() {
         HandyInitializingState()
       ],
     );
+
     blocTest(
       'Initialize the app with user logged in',
       build: () {
@@ -95,7 +100,11 @@ void main() {
     blocTest(
       'When the user want help someone else',
       build: () {
-        when(helpService.getHelp())
+        when(deviceInfoService.getDeviceInfo()).thenAnswer(
+          (_) => Future.value(deviceUserLoggedIn),
+        );
+
+        when(helpService.getOtherHelpRequests('1'))
             .thenAnswer((_) => Future.value(helpRequests));
         return handyBloc;
       },
@@ -123,7 +132,7 @@ void main() {
     );
 
     blocTest(
-      'When the user send the help request',
+      'When the user sends the help request',
       build: () {
         when(helpService.askHelp(Help())).thenAnswer(
           (_) => Future.value(true),
@@ -138,12 +147,24 @@ void main() {
     );
 
     blocTest(
-      'When the user send starts the Chat',
-      build: () => handyBloc,
-      act: (bloc) => bloc.add(StartChatEvent()),
+      'When the user starts the Chat',
+      build: () {
+        when(deviceInfoService.getDeviceInfo()).thenAnswer(
+          (_) => Future.value(deviceUserLoggedIn),
+        );
+
+        when(helpService.getChatMessages()).thenAnswer(
+          (_) => chatMessages,
+        );
+        return handyBloc;
+      },
+      act: (bloc) => bloc.add(StartChatEvent(help: helpRequests.first)),
       expect: [
         HandyInitializingState(secondsToFinish: defaultSecondsToFinish),
-        StartChatState(),
+        StartChatState(
+            help: helpRequests.first,
+            messages: chatMessages,
+            deviceInfo: deviceUserLoggedIn)
       ],
     );
 
@@ -154,7 +175,7 @@ void main() {
           (_) => Future.value(DeviceInfo(uuid: 'BazingaUser')),
         );
 
-        when(helpService.getHelpFrom('BazingaUser')).thenAnswer(
+        when(helpService.getMyHelpRequests('BazingaUser')).thenAnswer(
           (_) => Future.value(helpRequests),
         );
         return handyBloc;

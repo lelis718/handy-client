@@ -55,14 +55,21 @@ class RequestSentState extends HandyState {
 }
 
 class StartChatState extends HandyState {
+  final Help help;
+  final List<ChatMessage> messages;
+  final DeviceInfo deviceInfo;
+
+  const StartChatState({this.help, this.messages, this.deviceInfo});
+
   @override
-  List get props => [];
+  List get props => [help, messages, deviceInfo];
 }
 
 class LoadState extends HandyState {
   @override
-  List get props => [];
+  List get props => null;
 }
+
 class MyRequestsState extends HandyState {
   final List<Help> helpRequests;
 
