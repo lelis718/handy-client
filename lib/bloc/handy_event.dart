@@ -58,10 +58,7 @@ class MyRequestsEvent extends HandyEvent {
   List<Object> get props => null;
 }
 
-class SendChatMessageEvent extends HandyEvent {
-  final String message;
-
-  const SendChatMessageEvent({this.message});
+class RequestLocationEvent extends HandyEvent {
   @override
-  List<Object> get props => [message];
+  List<Object> get props => null;
 }

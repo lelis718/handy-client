@@ -79,3 +79,14 @@ class MyRequestsState extends HandyState {
   @override
   List<Object> get props => [helpRequests];
 }
+
+class RequestLocationState extends HandyState {
+  @override
+  List get props => [];
+
+  final HandyEvent successEvent;
+  final HandyEvent errorEvent;
+
+  const RequestLocationState({@required this.successEvent, @required this.errorEvent})
+      : assert(successEvent != null, errorEvent != null);
+}

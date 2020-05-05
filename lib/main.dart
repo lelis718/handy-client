@@ -125,7 +125,7 @@ class HandyClient extends StatelessWidget {
           if (state is MyRequestsState) {
             return MyRequestsPage(helpRequests: state.helpRequests);
           }
-
+        
           return Container();
         }),
       ),

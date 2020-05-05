@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:handyclientapp/models/models.dart';
+import 'package:handyclientapp/services/location_service.dart';
 import 'package:handyclientapp/services/services.dart';
 
 part 'handy_event.dart';
@@ -11,11 +13,12 @@ part 'handy_state.dart';
 
 class HandyBloc extends Bloc<HandyEvent, HandyState> {
   final DeviceInfoService deviceInfoService;
+  final LocationService locationService;
   final HelpService helpService;
   final IntroService introService;
   DeviceInfo _deviceInfo;
 
-  HandyBloc({this.deviceInfoService, this.helpService, this.introService});
+  HandyBloc({this.deviceInfoService, this.helpService, this.introService, this.locationService});
 
   @override
   HandyState get initialState => HandyInitializingState(secondsToFinish: 3);
@@ -46,7 +49,16 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
     }
 
     if (event is NeedHelpEvent) {
-      final deviceInfo = await this._getDeviceInfo();
+      final deviceInfo = await deviceInfoService.getDeviceInfo();
+      var locationAvailable = await locationService.isLocationAvailable();
+      
+      if(!locationAvailable) {
+        yield RequestLocationState(successEvent: NeedHelpEvent(), errorEvent: NeedHelpEvent());
+      }
+
+      
+
+
       yield NeedHelpState(deviceInfo: deviceInfo);
     }
 
@@ -68,6 +80,7 @@ class HandyBloc extends Bloc<HandyEvent, HandyState> {
       final myHelpRequests = await helpService.getMyHelpRequests(userId);
       yield MyRequestsState(helpRequests: myHelpRequests);
     }
+
   }
 
   Future<DeviceInfo> _getDeviceInfo() async {
