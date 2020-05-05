@@ -23,10 +23,10 @@ jobs:
     
     # Analyze our Dart code
     - run: flutter analyze
-
+    
     # Run our tests
     - run: flutter test --coverage
-      - uses: codecov/codecov-action@v1.0.5
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage/lcov.info 
+    - uses: codecov/codecov-action@v1.0.5
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage/lcov.info 
