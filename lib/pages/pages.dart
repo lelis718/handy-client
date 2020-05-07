@@ -5,3 +5,6 @@ export 'splash/splash_page.dart';
 export 'need_help/need_help_page.dart';
 export 'chat/chat_page.dart';
 export 'my_requests/my_requests_page.dart';
+export 'shared/widgets/loading.dart';
+export 'shared/widgets/action_footer_button.dart';
+export 'shared/themes/handy_theme.dart';

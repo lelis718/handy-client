@@ -3,3 +3,4 @@ export 'device_info.dart';
 export 'help.dart';
 export 'chat_message.dart';
 export 'location_info.dart';
+export 'pages.dart';

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/models/card_info.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handyclientapp/bloc/intro/intro.dart';
+import 'package:handyclientapp/bloc/navigation/navigation_bloc.dart';
+import 'package:handyclientapp/bloc/navigation/navigation_event.dart';
+
+import 'package:handyclientapp/pages/pages.dart';
 
 import 'widgets/intro_card.dart';
 
 class IntroPage extends StatefulWidget {
-  final List<CardInfo> cardsInfo;
-  final VoidCallback onFinishCards;
+  final IntroBloc introBloc;
 
-  IntroPage({Key key, this.cardsInfo, this.onFinishCards}) : super(key: key);
+  IntroPage({Key key, this.introBloc}) : super(key: key);
 
   @override
   _IntroPageState createState() => _IntroPageState();
@@ -18,37 +22,25 @@ class _IntroPageState extends State<IntroPage> {
   List<Widget> widgetCards = new List();
 
   @override
-  void initState() {
-    super.initState();
-    for (final cardInfo in widget.cardsInfo) {
-      this.cards.add(
-            IntroCard(
-              color: cardInfo.color,
-              icon: cardInfo.icon,
-              title: cardInfo.title,
-            ),
-          );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Handy"),
-        ),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            children: _getIntroCards(),
-          ),
-        ),
-      ),
-    );
+    return HandyTheme(
+        title: "Handy",
+        child: BlocBuilder<IntroBloc, IntroState>(
+            bloc: this.widget.introBloc,
+            builder: (context, state) {
+              if (state is CardsLoaded) {
+                return Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: _getIntroCards(),
+                    ),
+                  ),
+                );
+              }
+              return Container();
+            }));
   }
 
   List<Widget> _getIntroCards() {
@@ -68,7 +60,7 @@ class _IntroPageState extends State<IntroPage> {
                   () {
                     cards.removeAt(cards.length - (index + 1));
                     if (cards.length == 0) {
-                      widget.onFinishCards();
+                      BlocProvider.of<NavigationBloc>(context).add(NavigateToHome());
                     }
                   },
                 );

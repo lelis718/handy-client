@@ -1,35 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/bloc/handy_bloc.dart';
-import 'package:handyclientapp/pages/my_requests/my_requests_page.dart';
-import 'package:handyclientapp/pages/need_help/request_sucess_confirmation.dart';
-import 'package:handyclientapp/pages/widgets/loading.dart';
+import 'package:handyclientapp/bloc/intro/intro_event.dart';
+import 'package:handyclientapp/bloc/navigation/navigation_state.dart';
 import 'package:handyclientapp/service_locator.dart';
 
+import 'bloc/intro/intro_bloc.dart';
+import 'bloc/navigation/navigation_bloc.dart';
+import 'models/pages.dart';
 import 'pages/pages.dart';
 import 'services/services.dart';
 
 void main() {
   setupServiceLocator();
   runApp(
+
     HandyClient(
-      handyBloc: HandyBloc(
-        deviceInfoService: locator<DeviceInfoService>(),
-        helpService: locator<HelpService>(),
-        introService: locator<IntroService>(),
-      ),
-    ),
+        navigationBloc:
+            NavigationBloc(deviceInfoService: locator<DeviceInfoService>())),
   );
 }
 
-class HandyClient extends StatelessWidget {
-  final HandyBloc handyBloc;
 
-  HandyClient({this.handyBloc});
+class HandyClient extends StatelessWidget {
+  final NavigationBloc navigationBloc;
+  HandyClient({this.navigationBloc});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocListener(
+      bloc: navigationBloc,
+      listener: (context, state) {
+        if (state is PageSuccess) {
+          Navigator.of(context).pushNamed(HandyPageRoute.mapTo(state.pageName));
+        }
+      },
+      child: BlocBuilder<NavigationBloc, NavigationState>(
+          builder: (context, state) {
+        if (state is SplashPageShow) {
+          return SplashPage();
+        }
+        if (state is PageLoading) {
+          return Loading();
+        }
+        if (state is PageError) {
+          return Text(state.error);
+        }
+        return MaterialApp(
+          routes: {
+            HandyPageRoute.mapTo(Pages.Intro):(context){
+              final bloc = BlocProvider.of<IntroBloc>(context);
+              bloc.add(LoadCards());
+              return IntroPage(introBloc: bloc);
+            }
+          },
+        );
+      }),
+    );
+  }
+}
+
+/*
+Old code
+
+    MaterialApp(
       home: BlocProvider(
         create: (BuildContext context) => handyBloc,
         child: BlocBuilder<HandyBloc, HandyState>(builder: (context, state) {
@@ -132,3 +165,4 @@ class HandyClient extends StatelessWidget {
     );
   }
 }
+*/
