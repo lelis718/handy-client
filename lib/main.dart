@@ -1,61 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/bloc/intro/intro_event.dart';
-import 'package:handyclientapp/bloc/navigation/navigation_state.dart';
+import 'package:handyclientapp/modules/handy_theme/handy_theme.dart';
 import 'package:handyclientapp/service_locator.dart';
 
-import 'bloc/intro/intro_bloc.dart';
-import 'bloc/navigation/navigation_bloc.dart';
-import 'models/pages.dart';
+import 'main_bloc.dart';
+import 'models/models.dart';
 import 'pages/pages.dart';
 import 'services/services.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(
-
-    HandyClient(
-        navigationBloc:
-            NavigationBloc(deviceInfoService: locator<DeviceInfoService>())),
-  );
+  runApp(HandyClient());
 }
 
-
 class HandyClient extends StatelessWidget {
-  final NavigationBloc navigationBloc;
-  HandyClient({this.navigationBloc});
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  final routes = {
+    PageRoutes.home: (context) => HomePage(),
+    PageRoutes.intro: (context) => IntroPage(),
+  };
+
+  HandyClient();
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
-      bloc: navigationBloc,
-      listener: (context, state) {
-        if (state is PageSuccess) {
-          Navigator.of(context).pushNamed(HandyPageRoute.mapTo(state.pageName));
-        }
-      },
-      child: BlocBuilder<NavigationBloc, NavigationState>(
-          builder: (context, state) {
-        if (state is SplashPageShow) {
-          return SplashPage();
-        }
-        if (state is PageLoading) {
-          return Loading();
-        }
-        if (state is PageError) {
-          return Text(state.error);
-        }
-        return MaterialApp(
-          routes: {
-            HandyPageRoute.mapTo(Pages.Intro):(context){
-              final bloc = BlocProvider.of<IntroBloc>(context);
-              bloc.add(LoadCards());
-              return IntroPage(introBloc: bloc);
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<MainBloc>(create: (context) => MainBloc()),
+          BlocProvider<HandyThemeBloc>(create: (context) => HandyThemeBloc()),
+          BlocProvider<HomeBloc>(
+              create: (context) =>
+                  HomeBloc(deviceInfoService: locator<DeviceInfoService>())),
+          BlocProvider<IntroBloc>(
+              create: (context) =>
+                  IntroBloc(introService: locator<IntroService>())),
+        ],
+        child: BlocListener<MainBloc, MainState>(
+          listener: (context, state) {
+            if (state is NavigationChanged) {
+              print("Changing route to ${state.route}");
+              _navigatorKey.currentState.pushNamed(state.route);
+            } else if (state is NavigationPop &&
+                _navigatorKey.currentState.canPop()) {
+              _navigatorKey.currentState.pop();
             }
           },
-        );
-      }),
-    );
+          child: MaterialApp(
+              home: HandyThemeWidget(
+                  navigatorKey: _navigatorKey,
+                  initialRoute: PageRoutes.home,
+                  routes: routes)),
+        ));
   }
 }
 

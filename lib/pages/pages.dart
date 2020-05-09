@@ -1,10 +1,8 @@
 export 'help_list/help_list_page.dart';
-export 'help_selector/help_selector_page.dart';
-export 'intro/intro_page.dart';
-export 'splash/splash_page.dart';
+export 'help_selector/help_selector.dart';
 export 'need_help/need_help_page.dart';
 export 'chat/chat_page.dart';
 export 'my_requests/my_requests_page.dart';
-export 'shared/widgets/loading.dart';
-export 'shared/widgets/action_footer_button.dart';
-export 'shared/themes/handy_theme.dart';
+export 'intro/intro.dart';
+export 'home/home.dart';
+export 'shared/shared.dart';

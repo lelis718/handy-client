@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class IntroCard {
-  String title = "";
-  IconData icon;
-  Color color;
+class IntroCard extends StatelessWidget{
+  final String title;
+  final IconData icon;
+  final Color color;
+  final bool rotate;
 
-  IntroCard({this.title, this.icon, this.color});
+  IntroCard({this.title, this.icon, this.color, this.rotate=false});
 
-  Widget drawCard(bool rotate) {
+  Widget build(context) {
     return Container(
       transform: rotate ? Matrix4.rotationZ(-0.05) : null,
       child: Card(
