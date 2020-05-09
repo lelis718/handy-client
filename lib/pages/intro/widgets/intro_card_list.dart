@@ -33,7 +33,7 @@ class IntroCardList extends StatelessWidget {
             child: Draggable(
               onDragEnd: (drag) {
                 print("Reloading cards...");
-                onSwipeCard(index);
+                onSwipeCard(0);
               },
               childWhenDragging: Container(),
               feedback: IntroCard(

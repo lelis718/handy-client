@@ -19,7 +19,7 @@ class IntroPage extends StatelessWidget {
     return  BlocBuilder<IntroBloc, IntroState>(
       builder: (context, state) {
         print("state changed $state");
-        if (state is LoadingCards) {
+        if (state is Initialize) {
           BlocProvider.of<IntroBloc>(context).add(LoadCards());
         }        
         if (state is CardsLoaded) {
