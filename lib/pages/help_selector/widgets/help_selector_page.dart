@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme_bloc.dart';
 
+import '../../pages.dart';
 import 'need_help.dart';
 import 'wanna_help.dart';
 

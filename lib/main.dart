@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme.dart';
 import 'package:handyclientapp/service_locator.dart';
 
 import 'main_bloc.dart';

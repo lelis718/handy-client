@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme_event.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme_state.dart';
+import 'handy_theme.dart';
 
 class HandyThemeBloc extends Bloc<HandyThemeEvent, HandyThemeState>{
   @override

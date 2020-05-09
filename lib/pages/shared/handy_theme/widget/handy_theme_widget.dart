@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme_bloc.dart';
-import 'package:handyclientapp/modules/handy_theme/handy_theme_state.dart';
+
+import '../handy_theme.dart';
 
 class HandyThemeWidget extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
