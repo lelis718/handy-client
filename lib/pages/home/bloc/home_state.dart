@@ -4,15 +4,15 @@ import 'package:equatable/equatable.dart';
 abstract class HomeState extends Equatable {
 }
 
-class HomeStateInitialize extends HomeState{
+class HomeInitializeState extends HomeState{
   @override
   List<Object> get props => null;
 }
-class HomeStateIntro extends HomeState{
+class HomeIntroState extends HomeState{
   @override
   List<Object> get props => null;
 }
-class HomeStateHelpSelect extends HomeState{
+class HomeHelpSelectState extends HomeState{
   @override
   List<Object> get props => null;
 }

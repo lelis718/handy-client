@@ -10,22 +10,22 @@ class HelpSelectorWidget extends StatelessWidget {
     return BlocBuilder<HelpSelectorBloc, HelpSelectorState>(
       builder: (context, state) {
 
-          if (state is HandyLoggedInState) {
+          if (state is HelpSelectorHandyLoggedInState) {
             return HelpSelectorPage(
               onSwipeLeft: () {
-                context.bloc<NavigationBloc>().add(NavigateToPage(page: Routes.helpList));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.helpList));
               },
               onSwipeRight: () {
-                context.bloc<NavigationBloc>().add(NavigateToPage(page: Routes.needHelp));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.needHelp));
               },
               onRequestHelpTap: () {
-                context.bloc<NavigationBloc>().add(NavigateToPage(page: Routes.needHelp));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.needHelp));
               },
               onMyRequestsTap: () {
-                context.bloc<NavigationBloc>().add(NavigateToPage(page: Routes.myHelpRequests));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.myHelpRequests));
               },
               onHelpSomeoneTap: () {
-                context.bloc<NavigationBloc>().add(NavigateToPage(page: Routes.helpList));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.helpList));
               },
             );
           }       

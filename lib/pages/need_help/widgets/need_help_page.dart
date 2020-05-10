@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handyclientapp/models/models.dart';
+import 'package:handyclientapp/pages/help_list/model/help.dart';
 
 class NeedHelpPage extends StatelessWidget {
   final VoidCallback onReturning;

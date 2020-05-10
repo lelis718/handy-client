@@ -4,12 +4,12 @@ import '../handy_theme.dart';
 
 class HandyThemeBloc extends Bloc<HandyThemeEvent, HandyThemeState>{
   @override
-  HandyThemeState get initialState => HandyThemeInitialize();
+  HandyThemeState get initialState => HandyThemeInitializeState();
 
   @override
   Stream<HandyThemeState> mapEventToState(HandyThemeEvent event) async* {
-    if(event is HandyThemeUpdateTitle){
-      yield HandyThemeTitleUpdated(title: event.title);
+    if(event is HandyThemeUpdateTitleEvent){
+      yield HandyThemeTitleUpdatedState(title: event.title);
     }
   }
   

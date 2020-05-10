@@ -5,14 +5,14 @@ abstract class IntroEvent extends Equatable {
   const IntroEvent();
 }
 
-class LoadCards extends IntroEvent{
+class IntroLoadCardsEvent extends IntroEvent{
   @override
   List<Object> get props => null;
 }
-class RemoveCard extends IntroEvent{
+class IntroRemoveCardEvent extends IntroEvent{
 
   final int cardIndex;
-  RemoveCard({this.cardIndex});
+  IntroRemoveCardEvent({this.cardIndex});
 
   @override
   List<Object> get props => [cardIndex];

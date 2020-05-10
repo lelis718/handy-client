@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:handyclientapp/pages/shared/shared.dart';
 
-class ActionFooter extends StatelessWidget {
+class HelpListFooter extends StatelessWidget {
   final VoidCallback onNextHelp;
   final VoidCallback onHelp;
 
-  const ActionFooter({@required this.onNextHelp, @required this.onHelp});
+  const HelpListFooter({@required this.onNextHelp, @required this.onHelp});
 
   @override
   Widget build(BuildContext context) {

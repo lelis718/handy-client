@@ -6,24 +6,24 @@ abstract class IntroState extends Equatable {
   const IntroState();
 }
 
-class Initialize extends IntroState {
+class IntroInitializeState extends IntroState {
   @override
   List<Object> get props => null;
 }
 
-class LoadingCards extends IntroState{
+class IntroLoadingCardsState extends IntroState{
   @override
   List<Object> get props => null;
 }
-class CardsLoaded extends IntroState {
+class IntroCardsLoadedState extends IntroState {
   final List<CardInfo> cards;
 
-  const CardsLoaded({this.cards});
+  const IntroCardsLoadedState({this.cards});
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [cards];
 }
-class CardsEnded extends IntroState{
+class IntroCardsEndedState extends IntroState{
   @override
   List<Object> get props => null;
 }

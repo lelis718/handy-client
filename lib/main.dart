@@ -13,6 +13,7 @@ void main() {
 }
 
 class HandyClient extends StatelessWidget {
+  final initialRoute = Routes.home;
   final routes = {
     Routes.home: (context) => HomePage(),
     Routes.intro: (context) => IntroPage(),
@@ -24,6 +25,9 @@ class HandyClient extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<NavigationBloc>(
+          create: (context) => NavigationBloc(),
+        ),
         BlocProvider<NavigationBloc>(
           create: (context) => NavigationBloc(),
         ),
@@ -40,9 +44,38 @@ class HandyClient extends StatelessWidget {
             introService: locator<IntroService>(),
           ),
         ),
+        BlocProvider<HelpSelectorBloc>(
+          create: (context) => HelpSelectorBloc(),
+        ),
+        BlocProvider<HelpListBloc>(
+          create: (context) => HelpListBloc(
+            deviceInfoService: locator<DeviceInfoService>(),
+            helpService: locator<HelpService>(),
+          ),
+        ),
+        BlocProvider<MyRequestsBloc>(
+          create: (context) => MyRequestsBloc(
+            deviceInfoService: locator<DeviceInfoService>(),
+            helpService: locator<HelpService>(),
+          ),
+        ),
+        BlocProvider<ChatBloc>(
+          create: (context) => ChatBloc(
+            deviceInfoService: locator<DeviceInfoService>(),
+            helpService: locator<HelpService>(),
+          ),
+        ),
+        BlocProvider<NeedHelpBloc>(
+          create: (context) => NeedHelpBloc(
+            deviceInfoService: locator<DeviceInfoService>(),
+            helpService: locator<HelpService>(),
+          ),
+        ),
+
       ],
       child: MaterialApp(
-        home: NavigationWidget(
+        home: HandyThemeWidget(
+          initialRoute: initialRoute,
           routes: routes,
         ),
       ),

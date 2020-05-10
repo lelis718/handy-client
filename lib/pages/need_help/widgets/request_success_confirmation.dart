@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class RequestSucessConfirmation extends StatelessWidget {
+class RequestSuccessConfirmation extends StatelessWidget {
   final VoidCallback onClose;
 
-  const RequestSucessConfirmation({this.onClose});
+  const RequestSuccessConfirmation({this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class RequestSucessConfirmation extends StatelessWidget {
         content: new Text('Alert Dialog body'),
         actions: <Widget>[
           new FlatButton(
-            key: Key('RequestSucessConfirmation_AlertDialog'),
+            key: Key('RequestSuccessConfirmation_AlertDialog'),
             child: new Text('Close'),
             onPressed: onClose,
           ),

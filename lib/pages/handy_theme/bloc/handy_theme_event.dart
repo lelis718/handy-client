@@ -4,9 +4,9 @@ abstract class HandyThemeEvent extends Equatable{
   const HandyThemeEvent();
 }
 
-class HandyThemeUpdateTitle extends HandyThemeEvent{
+class HandyThemeUpdateTitleEvent extends HandyThemeEvent{
   final String title;
-  const HandyThemeUpdateTitle({this.title});
+  const HandyThemeUpdateTitleEvent({this.title});
   @override
   List<Object> get props => [title];
 }

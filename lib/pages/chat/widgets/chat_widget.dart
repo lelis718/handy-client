@@ -10,21 +10,21 @@ class ChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
-        if (state is StartChatState) {
+        if (state is ChatStartState) {
           return ChatPage(
             help: state.help,
             messages: state.messages,
             deviceInfo: state.deviceInfo,
             onReturning: () {
               context.bloc<NavigationBloc>().add(
-                    NavigateToPage(
+                    NavigationGoToPageEvent(
                       page: Routes.helpDetail,
                       args: state.help,
                     ),
                   );
             },
             onSendMessage: (message) {
-              context.bloc<ChatBloc>().add(SendChatMessageEvent());
+              context.bloc<ChatBloc>().add(ChatSendMessageEvent());
             },
           );
         }

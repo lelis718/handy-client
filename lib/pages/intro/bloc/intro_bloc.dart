@@ -12,7 +12,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
 
   @override
   IntroState get initialState {
-    return Initialize();
+    return IntroInitializeState();
   }
 
   @override
@@ -20,16 +20,16 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
     IntroEvent event,
   ) async* {
 
-    if (event is LoadCards) {
-      yield LoadingCards();
+    if (event is IntroLoadCardsEvent) {
+      yield IntroLoadingCardsState();
       final cards = introService.resetAndGetCards();
-      yield CardsLoaded(cards:cards);
+      yield IntroCardsLoadedState(cards:cards);
     }
 
-    if (event is RemoveCard) {
-      yield LoadingCards();
+    if (event is IntroRemoveCardEvent) {
+      yield IntroLoadingCardsState();
       final cards = introService.removeAndGetCards(event.cardIndex);
-      yield (cards.length > 0) ? CardsLoaded(cards:cards) : CardsEnded();
+      yield (cards.length > 0) ? IntroCardsLoadedState(cards:cards) : IntroCardsEndedState();
     }
   }
 }

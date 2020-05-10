@@ -16,19 +16,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   HomeState get initialState {
-    return HomeStateInitialize();
+    return HomeInitializeState();
   }
 
   @override
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-      if(event is HomeEventInitialize){
+      if(event is HomeInitializeEvent){
         final deviceInfo = await deviceInfoService.getDeviceInfo();
         if (deviceInfo.hasLoggedIn) {
-          yield HomeStateIntro();
+          yield HomeIntroState();
         } else {
-          yield HomeStateHelpSelect();
+          yield HomeHelpSelectState();
         }
       }
   }

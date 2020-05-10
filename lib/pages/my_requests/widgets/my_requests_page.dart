@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/models/help.dart';
+import 'package:handyclientapp/pages/help_list/model/help.dart';
 import 'package:handyclientapp/pages/my_requests/widgets/help_request.dart';
 
 class MyRequestsPage extends StatelessWidget {

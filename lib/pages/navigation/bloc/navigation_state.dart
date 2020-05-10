@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 abstract class NavigationState extends Equatable{
 }
-class NavigationChanged extends NavigationState{
+class NavigationChangedState extends NavigationState{
   final String route;
-  NavigationChanged(this.route);
+  NavigationChangedState(this.route);
   @override
   List<Object> get props => [route];
 }
-class NavigationPopped extends NavigationState{
+class NavigationPoppedState extends NavigationState{
   @override
   List<Object> get props => null;
 }

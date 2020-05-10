@@ -28,13 +28,13 @@ class _HelpListPageState extends State<HelpListPage> {
   Widget build(BuildContext context) {
     context
         .bloc<HandyThemeBloc>()
-        .add(HandyThemeUpdateTitle(title: 'Swipe cards to give a hand'));
+        .add(HandyThemeUpdateTitleEvent(title: 'Swipe cards to give a hand'));
     return BlocBuilder<HelpListBloc, HelpListState>(
       builder: (context, state) {
-        if (state is InitializeState) {
-          context.bloc<HelpListBloc>().add(WantToHelpEvent());
+        if (state is HelpListInitializeState) {
+          context.bloc<HelpListBloc>().add(HelpListWantToHelpEvent());
         }
-        if (state is WantToHelpState) {
+        if (state is HelpListWantToHelpState) {
           helpRequests = state.helpRequests;
           this.cards = new List();
           helpRequests.forEach((item) {
@@ -55,7 +55,7 @@ class _HelpListPageState extends State<HelpListPage> {
                     children: _drawDraggableCards(context),
                   ),
                 ),
-                ActionFooter(
+                HelpListFooter(
                   onHelp: () {
                     final help = this.helpRequests[0];
                     _openCard(context, help);
@@ -73,7 +73,7 @@ class _HelpListPageState extends State<HelpListPage> {
 
   void _openCard(BuildContext context, Help help) {
     context.bloc<NavigationBloc>().add(
-          NavigateToPage(
+          NavigationGoToPageEvent(
             page: Routes.helpDetail,
             args: help,
           ),

@@ -4,7 +4,7 @@ import '../help_selector.dart';
 
 class HelpSelectorBloc extends Bloc<HelpSelectorEvent, HelpSelectorState>{
   @override
-  HelpSelectorState get initialState => HandyLoggedInState();
+  HelpSelectorState get initialState => HelpSelectorHandyLoggedInState();
 
   @override
   Stream<HelpSelectorState> mapEventToState(HelpSelectorEvent event) {

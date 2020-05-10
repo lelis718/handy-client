@@ -5,8 +5,7 @@ class Loading extends StatelessWidget {
   Loading({this.textToDisplay});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         color: Colors.white,
         child: Center(
           child: Column(
@@ -34,7 +33,6 @@ class Loading extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

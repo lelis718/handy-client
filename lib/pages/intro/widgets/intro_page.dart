@@ -13,17 +13,18 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context
         .bloc<HandyThemeBloc>()
-        .add(HandyThemeUpdateTitle(title: "Welcome to Handy!"));
+        .add(HandyThemeUpdateTitleEvent(title: "Welcome to Handy!"));
 
     return BlocBuilder<IntroBloc, IntroState>(
       builder: (context, state) {
         print("state changed $state");
 
-        if (state is Initialize) {
-          context.bloc<IntroBloc>().add(LoadCards());
+        if (state is IntroInitializeState) {
+          print("Dispatching Event IntroCardsEvent");
+          context.bloc<IntroBloc>().add(IntroLoadCardsEvent());
         }
 
-        if (state is CardsLoaded) {
+        if (state is IntroCardsLoadedState) {
           print("Loading cards (${state.cards.length})");
           return Container(
             color: Colors.white,
@@ -33,16 +34,16 @@ class IntroPage extends StatelessWidget {
                 onSwipeCard: (int cardIndex) {
                   context
                       .bloc<IntroBloc>()
-                      .add(RemoveCard(cardIndex: cardIndex));
+                      .add(IntroRemoveCardEvent(cardIndex: cardIndex));
                 },
               ),
             ),
           );
         }
-        if (state is CardsEnded) {
+        if (state is IntroCardsEndedState) {
           context
               .bloc<NavigationBloc>()
-              .add(NavigateToPage(page: Routes.helpSelector));
+              .add(NavigationGoToPageEvent(page: Routes.helpSelector));
         }
         return Loading(textToDisplay: "Loading...");
       },

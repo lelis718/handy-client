@@ -8,18 +8,18 @@ abstract class ChatState extends Equatable{
   const ChatState();
 }
 
-class InitializeState extends ChatState{
+class ChatInitializeState extends ChatState{
   @override
   List<Object> get props => null;
 }
 
-class StartChatState extends ChatState{
+class ChatStartState extends ChatState{
 
   final Help help;
   final DeviceInfo deviceInfo;
   final List<ChatMessage> messages;
 
-  StartChatState({this.help, this.deviceInfo, this.messages});
+  ChatStartState({this.help, this.deviceInfo, this.messages});
   @override
   List<Object> get props => [help, deviceInfo, messages];
 }

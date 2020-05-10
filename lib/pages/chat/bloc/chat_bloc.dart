@@ -10,14 +10,14 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc({this.helpService, this.deviceInfoService});
 
   @override
-  ChatState get initialState => InitializeState();
+  ChatState get initialState => ChatInitializeState();
 
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
-    if (event is StartChatEvent) {
-      final messages = await helpService.getChatMessages();
+    if (event is ChatStartEvent) {
+      final messages = helpService.getChatMessages();
       final deviceInfo = await this.deviceInfoService.getDeviceInfo();
-      yield StartChatState(
+      yield ChatStartState(
           help: event.help, messages: messages, deviceInfo: deviceInfo);
     }
   }

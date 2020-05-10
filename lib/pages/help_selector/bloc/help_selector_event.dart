@@ -4,7 +4,7 @@ abstract class HelpSelectorEvent extends Equatable{
   const HelpSelectorEvent();
 }
 
-class InitializeEvent extends HelpSelectorEvent{
+class HelpSelectorInitializeEvent extends HelpSelectorEvent{
   @override
   List<Object> get props => null;
 }

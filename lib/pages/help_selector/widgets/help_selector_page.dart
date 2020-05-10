@@ -23,7 +23,7 @@ class HelpSelectorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HandyThemeBloc>(context).add(HandyThemeUpdateTitle(title:"What do you want to do?"));
+    BlocProvider.of<HandyThemeBloc>(context).add(HandyThemeUpdateTitleEvent(title:"What do you want to do?"));
     
     return Container(
         color: Colors.white,

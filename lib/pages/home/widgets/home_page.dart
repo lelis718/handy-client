@@ -12,19 +12,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        if (state is HomeStateInitialize) {
+        if (state is HomeInitializeState) {
           BlocProvider.of<HomeBloc>(context).add(
-            HomeEventInitialize(),
+            HomeInitializeEvent(),
           );
-        } else if (state is HomeStateIntro) {
+        } else if (state is HomeIntroState) {
           BlocProvider.of<NavigationBloc>(context).add(
-            NavigateToPage(
+            NavigationGoToPageEvent(
               page: Routes.intro,
             ),
           );
-        } else if (state is HomeStateHelpSelect) {
+        } else if (state is HomeHelpSelectState) {
           BlocProvider.of<NavigationBloc>(context).add(
-            NavigateToPage(
+            NavigationGoToPageEvent(
               page: Routes.helpSelector,
             ),
           );

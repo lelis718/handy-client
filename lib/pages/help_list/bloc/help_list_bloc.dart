@@ -12,15 +12,15 @@ class HelpListBloc extends Bloc<HelpListEvent, HelpListState>{
 
 
   @override
-  HelpListState get initialState => InitializeState();
+  HelpListState get initialState => HelpListInitializeState();
 
   @override
   Stream<HelpListState> mapEventToState(HelpListEvent event) async* {
-    if (event is WantToHelpEvent) {
-      yield LoadState();
+    if (event is HelpListWantToHelpEvent) {
+      yield HelpListLoadState();
       final userId = (await this.deviceInfoService.getDeviceInfo()).uuid;
       final helpRequests = await helpService.getOtherHelpRequests(userId);
-      yield WantToHelpState(helpRequests: helpRequests);
+      yield HelpListWantToHelpState(helpRequests: helpRequests);
     }
   }
 

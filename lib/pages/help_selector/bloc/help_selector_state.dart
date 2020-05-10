@@ -4,7 +4,7 @@ abstract class HelpSelectorState extends Equatable{
   const HelpSelectorState();
 }
 
-class HandyLoggedInState extends HelpSelectorState {
+class HelpSelectorHandyLoggedInState extends HelpSelectorState {
   @override
   List get props => [];
 }
