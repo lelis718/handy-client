@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
-        return Loading(textToDisplay: "loading...");
+        return Loading(textToDisplay: "loading (home)...");
       },
     );
   }

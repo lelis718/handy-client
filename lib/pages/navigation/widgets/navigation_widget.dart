@@ -5,29 +5,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../navigation.dart';
 
 class NavigationWidget extends StatelessWidget {
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
+  final GlobalKey<NavigatorState> navigatorKey;
   final String initialRoute;
   final Map<String, WidgetBuilder> routes;
 
-  NavigationWidget({Key key, this.routes, this.initialRoute}) : super(key: key);
+  NavigationWidget({Key key, this.routes, this.initialRoute, this.navigatorKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<NavigationBloc, NavigationState>(
       listener: (context, state) {
+        print("Current navigaton state $state");
         if (state is NavigationChangedState) {
           print("Changing route to ${state.route}");
-          _navigatorKey.currentState.pushNamed(state.route);
+          navigatorKey.currentState.pushNamed(state.route);
         }
         if (state is NavigationPoppedState) {
-          if (_navigatorKey.currentState.canPop()) {
-            _navigatorKey.currentState.pop();
+          if (navigatorKey.currentState.canPop()) {
+            navigatorKey.currentState.pop();
           }
         }
       },
       child:Navigator(
-          key: _navigatorKey,
+          key: navigatorKey,
           initialRoute: this.initialRoute,
+         // observers: [DebugNavObserver()],
           onGenerateRoute: (RouteSettings settings) {
             return MaterialPageRoute(
               builder: (context) => routes[settings.name](context),
@@ -37,4 +39,17 @@ class NavigationWidget extends StatelessWidget {
       )
     );
   }
+}
+
+class DebugNavObserver extends NavigatorObserver{
+
+    @override
+    void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
+        print('Route called $route');
+    }
+
+    @override
+    void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+        print('Route called $route');
+    }  
 }

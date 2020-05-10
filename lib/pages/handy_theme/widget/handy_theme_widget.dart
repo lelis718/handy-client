@@ -6,9 +6,10 @@ import 'package:handyclientapp/pages/navigation/navigation.dart';
 import '../handy_theme.dart';
 
 class HandyThemeWidget extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
   final Map<String, WidgetBuilder> routes;
   final String initialRoute;
-  HandyThemeWidget({this.routes, this.initialRoute});
+  HandyThemeWidget({this.routes, this.initialRoute, this.navigatorKey});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class HandyThemeWidget extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(title: Text(title)),
           body: NavigationWidget(
+            navigatorKey: navigatorKey,
             initialRoute: this.initialRoute,
             routes: routes,
           ),

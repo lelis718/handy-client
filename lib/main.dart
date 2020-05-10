@@ -13,6 +13,7 @@ void main() {
 }
 
 class HandyClient extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   final initialRoute = Routes.home;
   final routes = {
     Routes.home: (context) => HomePage(),
@@ -75,6 +76,7 @@ class HandyClient extends StatelessWidget {
       ],
       child: MaterialApp(
         home: HandyThemeWidget(
+          navigatorKey:navigatorKey,
           initialRoute: initialRoute,
           routes: routes,
         ),
