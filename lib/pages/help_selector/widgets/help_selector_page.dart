@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handyclientapp/pages/handy_theme/handy_theme.dart';
 
-import '../../pages.dart';
 import 'need_help.dart';
 import 'wanna_help.dart';
 
 class HelpSelectorPage extends StatelessWidget {
 
-  const HelpSelectorPage();
+  final VoidCallback onSwipeLeft;
+  final VoidCallback onSwipeRight;
+  final VoidCallback onRequestHelpTap;
+  final VoidCallback onMyRequestsTap;
+  final VoidCallback onHelpSomeoneTap;
+
+  const HelpSelectorPage({
+    this.onSwipeLeft, 
+    this.onSwipeRight,
+    this.onRequestHelpTap,
+    this.onMyRequestsTap,
+    this.onHelpSomeoneTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +33,9 @@ class HelpSelectorPage extends StatelessWidget {
                   if (drag.offset.dx.abs() > 30) {
                     var isDragRight = drag.offset.dx > 0;
                     if (isDragRight) {
-                      //BlocProvider.of...
-                      //onSwipeRight();
+                      onSwipeRight();
                     } else {
-                      //onSwipeLeft();
+                      onSwipeLeft();
                     }
                   }
                 },

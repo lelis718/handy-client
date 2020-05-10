@@ -1,4 +1,4 @@
-abstract class PageRoutes{
+abstract class Routes{
 
   static const home='/';
   static const intro='/intro';

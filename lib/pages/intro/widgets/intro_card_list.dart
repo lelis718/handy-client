@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:handyclientapp/models/card_info.dart';
 
-import 'widgets.dart';
+import '../intro.dart';
 
 class IntroCardList extends StatelessWidget {
   final List<CardInfo> cards;

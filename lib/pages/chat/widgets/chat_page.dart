@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:handyclientapp/models/models.dart';
+import 'package:handyclientapp/models/device_info.dart';
+import 'package:handyclientapp/pages/help_list/help_list.dart';
+
+import '../chat.dart';
 
 class ChatPage extends StatelessWidget {
   final Help help;

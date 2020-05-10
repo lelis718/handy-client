@@ -1,4 +1,2 @@
-export 'home_bloc.dart';
-export 'home_event.dart';
-export 'home_state.dart';
-export 'widgets/home_page.dart';
+export 'widgets/widgets.dart';
+export 'bloc/bloc.dart';
