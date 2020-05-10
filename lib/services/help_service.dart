@@ -15,7 +15,7 @@ abstract class HelpService {
 
 class HelpServiceDefault extends HelpService {
   //final address = "https://us-central1-handy-app-ad6a5.cloudfunctions.net";
-  final address = 'http://10.0.2.2:5000/handy-app-ad6a5/us-central1';
+  final address = 'http://localhost:5000/handy-app-ad6a5/us-central1/app';
 
   @override
   Future<bool> askHelp(Help help) async {

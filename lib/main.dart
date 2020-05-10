@@ -18,6 +18,12 @@ class HandyClient extends StatelessWidget {
   final routes = {
     Routes.home: (context) => HomePage(),
     Routes.intro: (context) => IntroPage(),
+    Routes.helpSelector: (context) => HelpSelectorWidget(),
+    Routes.helpList: (context) => HelpListPage(),
+    //Routes.helpDetail: (context) => HelpDetailWidget(),
+    Routes.chat: (context) => ChatWidget(),
+    Routes.needHelp: (context) => NeedHelpWidget(),
+    Routes.myHelpRequests: (context) => MyRequestsWidget(),
   };
 
   HandyClient();
@@ -72,11 +78,10 @@ class HandyClient extends StatelessWidget {
             helpService: locator<HelpService>(),
           ),
         ),
-
       ],
       child: MaterialApp(
         home: HandyThemeWidget(
-          navigatorKey:navigatorKey,
+          navigatorKey: navigatorKey,
           initialRoute: initialRoute,
           routes: routes,
         ),

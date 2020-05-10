@@ -7,16 +7,17 @@ import '../help_selector.dart';
 class HelpSelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<HelpSelectorBloc, HelpSelectorState>(
       builder: (context, state) {
-
+          print("state changed $state");
           if (state is HelpSelectorHandyLoggedInState) {
             return HelpSelectorPage(
               onSwipeLeft: () {
-                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.helpList));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.needHelp));
               },
               onSwipeRight: () {
-                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.needHelp));
+                context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.helpList));
               },
               onRequestHelpTap: () {
                 context.bloc<NavigationBloc>().add(NavigationGoToPageEvent(page: Routes.needHelp));

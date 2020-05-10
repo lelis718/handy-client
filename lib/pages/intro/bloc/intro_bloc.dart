@@ -19,7 +19,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   Stream<IntroState> mapEventToState(
     IntroEvent event,
   ) async* {
-
+    print("event fired $event");
     if (event is IntroLoadCardsEvent) {
       yield IntroLoadingCardsState();
       final cards = introService.resetAndGetCards();
