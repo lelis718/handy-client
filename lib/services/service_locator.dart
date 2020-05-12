@@ -6,7 +6,12 @@ GetIt locator = GetIt.instance;
 
 setupServiceLocator() {
   locator.registerLazySingleton<DeviceInfoService>(
-      () => DeviceInfoServiceDefault());
-  locator.registerLazySingleton<HelpService>(() => HelpServiceDefault());
-  locator.registerLazySingleton<IntroService>(() => IntroServiceDefault());
+    () => DeviceInfoServiceDefault(),
+  );
+  locator.registerLazySingleton<HelpService>(
+    () => HelpServiceDefault(),
+  );
+  locator.registerLazySingleton<IntroService>(
+    () => IntroServiceDefault(),
+  );
 }
