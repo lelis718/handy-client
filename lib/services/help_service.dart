@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:handyclientapp/pages/chat/chat.dart';
-import 'package:handyclientapp/pages/help_list/help_list.dart';
+import 'package:handyclientapp/pages/help_selector/help_list/chat/chat.dart';
+import 'package:handyclientapp/pages/help_selector/help_list/model/help.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:uuid/uuid.dart';
@@ -15,7 +15,7 @@ abstract class HelpService {
 
 class HelpServiceDefault extends HelpService {
   //final address = "https://us-central1-handy-app-ad6a5.cloudfunctions.net";
-  final address = 'http://localhost:5000/handy-app-ad6a5/us-central1/app';
+  final address = 'http://10.0.2.2:5000/handy-app-ad6a5/us-central1';
 
   @override
   Future<bool> askHelp(Help help) async {
