@@ -7,8 +7,12 @@ class ActionFooterButton extends StatelessWidget {
   final String textButton;
   final IconData iconButton;
 
-  ActionFooterButton({Key key, this.textButton, this.iconButton, this.onTap})
-      : super(key: key);
+  ActionFooterButton({
+    Key key,
+    this.textButton,
+    this.iconButton,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

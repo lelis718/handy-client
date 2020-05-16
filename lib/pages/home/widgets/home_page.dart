@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/pages/navigation/navigation.dart';
+import 'package:handyclientapp/navigation/bloc/bloc.dart';
+import 'package:handyclientapp/navigation/model/model.dart';
 import 'package:handyclientapp/pages/shared/shared.dart';
 
 import '../home.dart';

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/pages/handy_theme/handy_theme.dart';
+import 'package:handyclientapp/pages/home/handy_theme/bloc/bloc.dart';
 
 import 'need_help.dart';
 import 'wanna_help.dart';
 
 class HelpSelectorPage extends StatelessWidget {
-
   final VoidCallback onSwipeLeft;
   final VoidCallback onSwipeRight;
   final VoidCallback onRequestHelpTap;
@@ -14,7 +13,7 @@ class HelpSelectorPage extends StatelessWidget {
   final VoidCallback onHelpSomeoneTap;
 
   const HelpSelectorPage({
-    this.onSwipeLeft, 
+    this.onSwipeLeft,
     this.onSwipeRight,
     this.onRequestHelpTap,
     this.onMyRequestsTap,
@@ -23,28 +22,29 @@ class HelpSelectorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HandyThemeBloc>(context).add(HandyThemeUpdateTitleEvent(title:"What do you want to do?"));
-    
+    BlocProvider.of<HandyThemeBloc>(context)
+        .add(HandyThemeUpdateTitleEvent(title: "What do you want to do?"));
+
     return Container(
-        color: Colors.white,
-        child: Center(
-          child:Draggable(
-                onDragEnd: (drag) {
-                  if (drag.offset.dx.abs() > 30) {
-                    var isDragRight = drag.offset.dx > 0;
-                    if (isDragRight) {
-                      onSwipeRight();
-                    } else {
-                      onSwipeLeft();
-                    }
-                  }
-                },
-                childWhenDragging: Container(),
-                feedback: _buildCard(),
-                child: _buildCard(),
-              ),
+      color: Colors.white,
+      child: Center(
+        child: Draggable(
+          onDragEnd: (drag) {
+            if (drag.offset.dx.abs() > 30) {
+              var isDragRight = drag.offset.dx > 0;
+              if (isDragRight) {
+                onSwipeRight();
+              } else {
+                onSwipeLeft();
+              }
+            }
+          },
+          childWhenDragging: Container(),
+          feedback: _buildCard(),
+          child: _buildCard(),
         ),
-      );
+      ),
+    );
   }
 
   Card _buildCard() {

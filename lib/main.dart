@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/service_locator.dart';
+import 'package:handyclientapp/pages/pages.dart';
+import 'package:handyclientapp/services/services.dart';
 
-import 'pages/handy_theme/handy_theme.dart';
-import 'pages/navigation/navigation.dart';
-import 'pages/pages.dart';
-import 'services/services.dart';
+import 'navigation/navigation.dart';
 
 void main() {
   setupServiceLocator();
@@ -14,7 +12,9 @@ void main() {
 
 class HandyClient extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
   final initialRoute = Routes.home;
+
   final routes = {
     Routes.home: (context) => HomePage(),
     Routes.intro: (context) => IntroPage(),

@@ -1,12 +1,9 @@
-
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:handyclientapp/main.dart';
-import 'package:handyclientapp/pages/handy_theme/widget/handy_theme_widget.dart';
+import 'package:handyclientapp/pages/home/home.dart';
 
 void main() {
- 
- group('Main Widget', () {
+  group('Main Widget', () {
     testWidgets('Ensure that HandyTheme is loaded ',
         (WidgetTester tester) async {
       //Act
@@ -14,5 +11,5 @@ void main() {
       //Assert
       expect(find.byType(HandyThemeWidget), findsOneWidget);
     });
-  });  
+  });
 }

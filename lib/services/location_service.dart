@@ -11,25 +11,21 @@ abstract class LocationService {
 class LocationServiceDefault extends LocationService {
   @override
   Future<LocationInfo> getCurrentLocation() async {
-    
-    Location loc = new Location();
-    LocationData currentLoc;
-    // set the initial location by pulling the user's 
-    // current location from the location's getLocation()
-    currentLoc = await loc.getLocation();
-    return new LocationInfo(latitude: currentLoc.latitude, longitude: currentLoc.longitude);
+    final loc = new Location();
+    final currentLoc = await loc.getLocation();
+    return LocationInfo(
+        latitude: currentLoc.latitude, longitude: currentLoc.longitude);
   }
 
-  Future<bool> isLocationAvailable() async{
-    Location loc = new Location();
+  Future<bool> isLocationAvailable() async {
+    final loc = new Location();
     var perm = await loc.hasPermission();
     return perm == PermissionStatus.GRANTED;
   }
 
-  Future<bool> requestLocationAccess() async{
-    Location loc = new Location();
+  Future<bool> requestLocationAccess() async {
+    final loc = new Location();
     var perm = await loc.requestPermission();
     return perm == PermissionStatus.GRANTED;
   }
-
 }
