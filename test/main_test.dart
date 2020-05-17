@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:handyclientapp/handy_theme/handy_theme.dart';
 import 'package:handyclientapp/main.dart';
-import 'package:handyclientapp/pages/home/home.dart';
 
 void main() {
   group('Main Widget', () {

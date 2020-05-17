@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handyclientapp/navigation/bloc/bloc.dart';
+import 'package:handyclientapp/handy_theme/handy_theme.dart';
 import 'package:handyclientapp/navigation/navigation.dart';
-import 'package:handyclientapp/pages/home/handy_theme/bloc/bloc.dart';
+import 'package:handyclientapp/pages/pages.dart';
 import 'package:handyclientapp/pages/shared/shared.dart';
-
-import '../help_list.dart';
+import 'package:handyclientapp/services/services.dart';
 
 class HelpListPage extends StatefulWidget {
   HelpListPage({Key key}) : super(key: key);
@@ -30,52 +29,63 @@ class _HelpListPageState extends State<HelpListPage> {
     context
         .bloc<HandyThemeBloc>()
         .add(HandyThemeUpdateTitleEvent(title: 'Swipe cards to give a hand'));
-    return BlocBuilder<HelpListBloc, HelpListState>(
-      builder: (context, state) {
-        if (state is HelpListInitializeState) {
-          context.bloc<HelpListBloc>().add(HelpListWantToHelpEvent());
-        }
-        if (state is HelpListWantToHelpState) {
-          helpRequests = state.helpRequests;
-          this.cards = new List();
-          helpRequests.forEach((item) {
-            cards.add(new HelpCard(item));
-          });
 
-          return Container(
-            color: Colors.white,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: 600,
-                  height: 450,
-                  padding: EdgeInsets.symmetric(vertical: 0),
-                  color: Colors.white,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: _drawDraggableCards(context),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HelpListBloc>(
+          create: (context) => HelpListBloc(
+            deviceInfoService: locator<DeviceInfoService>(),
+            helpService: locator<HelpService>(),
+          ),
+        ),
+      ],
+      child: BlocBuilder<HelpListBloc, HelpListState>(
+        builder: (context, state) {
+          if (state is HelpListInitializeState) {
+            context.bloc<HelpListBloc>().add(HelpListWantToHelpEvent());
+          }
+          if (state is HelpListWantToHelpState) {
+            helpRequests = state.helpRequests;
+            this.cards = new List();
+            helpRequests.forEach((item) {
+              cards.add(new HelpCard(item));
+            });
+
+            return Container(
+              color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: 600,
+                    height: 450,
+                    padding: EdgeInsets.symmetric(vertical: 0),
+                    color: Colors.white,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: _drawDraggableCards(context),
+                    ),
                   ),
-                ),
-                HelpListFooter(
-                  onHelp: () {
-                    final help = this.helpRequests[0];
-                    _openCard(context, help);
-                  },
-                  onNextHelp: () => _switchCards(),
-                ),
-              ],
-            ),
-          );
-        }
-        return Loading(textToDisplay: "Loading...");
-      },
+                  HelpListFooter(
+                    onHelp: () {
+                      final help = this.helpRequests[0];
+                      _openCard(context, help);
+                    },
+                    onNextHelp: () => _switchCards(),
+                  ),
+                ],
+              ),
+            );
+          }
+          return Loading(textToDisplay: "Loading...");
+        },
+      ),
     );
   }
 
   void _openCard(BuildContext context, Help help) {
     context.bloc<NavigationBloc>().add(
           NavigationGoToPageEvent(
-            page: Routes.helpDetail,
+            page: Routes.chat,
             args: help,
           ),
         );
@@ -85,7 +95,7 @@ class _HelpListPageState extends State<HelpListPage> {
     setState(
       () {
         var card = cards.removeAt(0);
-        cards.add(card);
+        //cards.add(card);
       },
     );
   }

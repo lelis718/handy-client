@@ -1,4 +1,3 @@
 export 'bloc/bloc.dart';
-export 'handy_theme/handy_theme.dart';
+export 'home_page.dart';
 export 'intro/intro.dart';
-export 'widgets/widgets.dart';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handyclientapp/pages/pages.dart';
 import 'package:handyclientapp/services/services.dart';
 
+import 'handy_theme/handy_theme.dart';
 import 'navigation/navigation.dart';
 
 void main() {
@@ -18,10 +19,10 @@ class HandyClient extends StatelessWidget {
   final routes = {
     Routes.home: (context) => HomePage(),
     Routes.intro: (context) => IntroPage(),
-    Routes.helpSelector: (context) => HelpSelectorWidget(),
+    Routes.helpSelector: (context) => HelpSelectorPage(),
     Routes.helpList: (context) => HelpListPage(),
     //Routes.helpDetail: (context) => HelpDetailWidget(),
-    Routes.chat: (context) => ChatWidget(),
+    Routes.chat: (context) => ChatPage(),
     Routes.needHelp: (context) => NeedHelpWidget(),
     Routes.myHelpRequests: (context) => MyRequestsWidget(),
   };
@@ -35,49 +36,21 @@ class HandyClient extends StatelessWidget {
         BlocProvider<NavigationBloc>(
           create: (context) => NavigationBloc(),
         ),
-        BlocProvider<NavigationBloc>(
-          create: (context) => NavigationBloc(),
-        ),
         BlocProvider<HandyThemeBloc>(
           create: (context) => HandyThemeBloc(),
         ),
-        BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc(
-            deviceInfoService: locator<DeviceInfoService>(),
-          ),
-        ),
-        BlocProvider<IntroBloc>(
-          create: (context) => IntroBloc(
-            introService: locator<IntroService>(),
-          ),
-        ),
-        BlocProvider<HelpSelectorBloc>(
-          create: (context) => HelpSelectorBloc(),
-        ),
-        BlocProvider<HelpListBloc>(
-          create: (context) => HelpListBloc(
-            deviceInfoService: locator<DeviceInfoService>(),
-            helpService: locator<HelpService>(),
-          ),
-        ),
-        BlocProvider<MyRequestsBloc>(
-          create: (context) => MyRequestsBloc(
-            deviceInfoService: locator<DeviceInfoService>(),
-            helpService: locator<HelpService>(),
-          ),
-        ),
-        BlocProvider<ChatBloc>(
-          create: (context) => ChatBloc(
-            deviceInfoService: locator<DeviceInfoService>(),
-            helpService: locator<HelpService>(),
-          ),
-        ),
-        BlocProvider<NeedHelpBloc>(
-          create: (context) => NeedHelpBloc(
-            deviceInfoService: locator<DeviceInfoService>(),
-            helpService: locator<HelpService>(),
-          ),
-        ),
+        // BlocProvider<HelpListBloc>(
+        //   create: (context) => HelpListBloc(
+        //     deviceInfoService: locator<DeviceInfoService>(),
+        //     helpService: locator<HelpService>(),
+        //   ),
+        // ),
+        // BlocProvider<MyRequestsBloc>(
+        //   create: (context) => MyRequestsBloc(
+        //     deviceInfoService: locator<DeviceInfoService>(),
+        //     helpService: locator<HelpService>(),
+        //   ),
+        // ),
       ],
       child: MaterialApp(
         home: HandyThemeWidget(
