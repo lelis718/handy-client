@@ -95,7 +95,7 @@ class _HelpListPageState extends State<HelpListPage> {
     setState(
       () {
         var card = cards.removeAt(0);
-        //cards.add(card);
+        cards.add(card);
       },
     );
   }
